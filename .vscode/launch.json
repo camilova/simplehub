@@ -1,0 +1,23 @@
+{
+  // Use IntelliSense para saber los atributos posibles.
+  // Mantenga el puntero para ver las descripciones de los existentes atributos.
+  // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Rails Linux",
+      "type": "Ruby",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "useBundler": true,
+      "pathToBundler": "/home/camilo/.rvm/gems/ruby-2.4.5/bin/bundler",
+      "pathToRDebugIDE": "/home/camilo/.rvm/gems/ruby-2.4.5/bin/rdebug-ide",
+      "program": "${workspaceRoot}/bin/rails",
+      "args": [
+          "server",
+          "-p",
+          "3000"
+      ]
+    }
+  ]
+}
