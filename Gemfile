@@ -66,3 +66,5 @@ gem 'popper_js', '~> 1.14.5'
 gem 'jquery-rails'
 gem 'sprockets-rails'
 gem 'bootstrap', '~> 4.4.1'
+
+gem 'pg'
