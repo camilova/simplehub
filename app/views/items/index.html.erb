@@ -1,31 +1,26 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Items</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Icon</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.title %></td>
-        <td><%= item.description %></td>
-        <td><%= item.icon %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Item', new_item_path %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col d-flex flex-column" style="max-height: 100vh">
+      <div class="row">
+        <div class="col text-center py-2 mb-2 bg-warning">
+          <h2>COVID-19 HUB - GUÍA DE PRÁCTICAS Y PROTOCOLOS</h2>
+        </div>
+      </div>
+      <div class="row flex-grow-1 justify-content-center overflow-auto">
+        <div class="col-xs-12 col-sm-10 col-xl-7">
+          <div class="list-group">
+            <% 50.times do @items.each do |item| %>
+              <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <h5 class="mb-1"><%= item.title %></h5>
+                  <span class="badge badge-primary badge-pill"><%= item.orders.count %></span>
+                </div>
+                <p class="mb-1"><%= item.description %></p>
+              </a>
+            <% end end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
