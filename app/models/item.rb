@@ -1,3 +1,4 @@
 class Item < ApplicationRecord
-  has_many :orders_of_items, dependent: :destroy
+  has_many :item_orders, dependent: :destroy
+  has_many :orders, through: :item_orders
 end

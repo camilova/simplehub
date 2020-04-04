@@ -1,3 +1,4 @@
 class Source < ApplicationRecord
-  has_many :source_of_orders, dependent: :destroy
+  has_many :order_sources, dependent: :destroy
+  has_many :orders, through: :order_sources
 end
