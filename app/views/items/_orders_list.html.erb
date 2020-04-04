@@ -1,17 +1,16 @@
 <ul class="list-group list-group-flush">
   <% item.orders.each do |order| %>
-    <li class="list-group-item">
+    <li class="list-group-item <%= 'text-line-through text-secondary bg-light' if order.deprecated? %>">
       <div class="d-flex w-100 justify-content-between">
         <h6 class="mb-1"><%= order.description %></h6>
+        <% if order.deprecated? %>
+          <small class="ml-auto mr-2">
+            <span class="badge badge-secondary badge-pill"><%= "En Desuso" %></span>
+          </small>
+        <% end %>
         <small><%= (order.published_at.presence || Date.today).to_s(:short) %></small>
       </div>
-      <ul class="">
-        <% order.sources.each do |source| %>
-          <li class="">
-            <a target="_blank" href="<%= source.link %>"><%= source.link %></a>
-          </li>
-        <% end %>
-      </ul>
+      <%= render partial: 'order_sources_list', locals: { order: order } %>
     </li>
   <% end %>
 </ul>
