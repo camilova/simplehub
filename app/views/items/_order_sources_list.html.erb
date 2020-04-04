@@ -1,9 +1,9 @@
 <ul class="">
   <% order.sources.each do |source| %>
     <li class="">
-      <a class="<%= 'text-secondary' if order.deprecated? %>" target="_blank" href="<%= source.link %>">
-        <%= source.link %>
-      </a>
+      <%= link_to (source.title.presence || source.link), source.link,
+        target: '_blank', class: (order.deprecated?? 'text-secondary' : '')
+      %>
     </li>
   <% end %>
 </ul>
