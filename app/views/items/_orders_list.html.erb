@@ -1,0 +1,17 @@
+<ul class="list-group list-group-flush">
+  <% item.orders.each do |order| %>
+    <li class="list-group-item">
+      <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1"><%= order.description %></h6>
+        <small><%= (order.published_at.presence || Date.today).to_s(:short) %></small>
+      </div>
+      <ul class="">
+        <% order.sources.each do |source| %>
+          <li class="">
+            <a target="_blank" href="<%= source.link %>"><%= source.link %></a>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
