@@ -1,0 +1,23 @@
+es:
+  date:
+    order:
+      - :day
+      - :month
+      - :year
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+    day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado]
+    abbr_day_names: [Do, Lu, Ma, Mi, Ju, Vi, Sa ]
+    formats:
+      short: "%d %b"
+      long: "%d de %B de %Y"
+      default: "%d-%m-%Y"
+  time:
+    formats:
+      short: "%d-%m-%Y %H:%M"
+      long: "%H:%M:%S del %d de %B de %Y"
+      default: "%d-%m-%Y %H:%M:%S"
+  items:
+    order_sources_list:
+      show_resource: Ver/reproducir la fuente
+      download_resource: Decargar la fuente

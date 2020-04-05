@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  AVAILABLE_LANGUAGES = [:en, :es]
+  before_action :set_locale
 
   private
 
@@ -31,5 +33,18 @@ class ApplicationController < ActionController::Base
       response.header["Content-Range"] = "bytes #{bytes.begin}-#{bytes.end}/#{size}" if bytes
       io.pos = offset
       send_data io.read(length), options
+    end
+
+    def set_locale
+      header_language = extract_locale_from_accept_language_header
+      I18n.locale = header_language || I18n.default_locale
+    end
+
+    # Extract language from request header
+    def extract_locale_from_accept_language_header
+      if request.env['HTTP_ACCEPT_LANGUAGE']
+        lg = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first.to_sym
+        lg.in?(AVAILABLE_LANGUAGES) ? lg : nil
+      end
     end
 end
