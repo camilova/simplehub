@@ -1,0 +1,115 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <%= render partial: 'layouts/header' %>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-3">
+      <div class="row">
+        <div class="col text-center border py-1 mb-1">
+          <b><%= t('.items') %></b>
+        </div>
+        <div class="col-auto ml-auto">
+          <%= link_to "#", class: "btn btn-sm btn-success" do %>
+            <%= fa_icon 'plus' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ul class="list-group list-group-flush">
+            <% @items.each do |item| %>
+              <% active = item == @item %>
+              <li class="list-group-item py-1 px-1 <%= 'active' if active %>">
+                <div class="btn-group" role="group">
+                  <%= link_to "#", class: "btn btn-sm #{'active text-white' if active}" do %>
+                    <%= fa_icon 'trash' %>
+                  <% end %>
+                  <%= link_to "#", class: "btn btn-sm #{'active text-white' if active}" do %>
+                    <%= fa_icon 'pencil' %>
+                  <% end %>
+                </div>
+                &nbsp;
+                <%= link_to administration_path(item: item.id), class: "#{'text-white' if active}" do %>
+                  <%= item.title %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row">
+        <div class="col text-center border py-1 mb-1">
+          <b><%= t('.orders') %></b>
+        </div>
+        <div class="col-auto ml-auto">
+          <%= link_to "#", class: "btn btn-sm btn-success" do %>
+            <%= fa_icon 'plus' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <li class="list-group list-group-flush">
+            <% @orders.each do |order| %>
+              <% active = order == @order %>
+              <li class="list-group-item py-1 px-1 <%= 'active' if order == @order %>">
+                <div class="btn-group" role="group">
+                  <%= link_to "#", class: "btn btn-sm #{'active text-white' if active}" do %>
+                    <%= fa_icon 'trash' %>
+                  <% end %>
+                  <%= link_to "#", class: "btn btn-sm #{'active text-white' if active}" do %>
+                    <%= fa_icon 'ban' %>
+                  <% end %>
+                  <%= link_to "#", class: "btn btn-sm #{'active text-white' if active}" do %>
+                    <%= fa_icon 'pencil' %>
+                  <% end %>
+                </div>
+                &nbsp;
+                <%= link_to administration_path(item: @item.id, order: order.id), 
+                  class: "#{'text-white' if active}" do %>
+                  <%= order.description %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col text-center border py-1 mb-1">
+          <b><%= t('.sources') %></b>
+        </div>
+        <div class="col-auto ml-auto">
+          <%= link_to "#", class: "btn btn-sm btn-success" do %>
+            <%= fa_icon 'plus' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ul class="list-group list-group-flush">
+            <% @sources.each do |source| %>
+              <li class="list-group-item py-1 px-1">
+                <div class="btn-group" role="group">
+                  <%= link_to "#", class: "btn btn-sm" do %>
+                    <%= fa_icon 'trash' %>
+                  <% end %>
+                  <%= link_to "#", class: "btn btn-sm" do %>
+                    <%= fa_icon 'pencil' %>
+                  <% end %>
+                </div>
+                &nbsp;
+                <%= source.title.presence || source.link %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
