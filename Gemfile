@@ -68,3 +68,5 @@ gem 'sprockets-rails'
 gem 'bootstrap', '~> 4.4.1'
 
 gem 'pg'
+
+gem "font-awesome-rails"

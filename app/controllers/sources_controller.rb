@@ -1,5 +1,5 @@
 class SourcesController < ApplicationController
-  before_action :set_source, only: [:show, :edit, :update, :destroy]
+  before_action :set_source, only: [:show, :download, :edit, :update, :destroy]
 
   # GET /sources
   # GET /sources.json
@@ -8,8 +8,12 @@ class SourcesController < ApplicationController
   end
 
   # GET /sources/1
-  # GET /sources/1.json
   def show
+    send_resource
+  end
+
+  def download
+    send_resource :attachment
   end
 
   # GET /sources/new
@@ -70,5 +74,11 @@ class SourcesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def source_params
       params.require(:source).permit(:link, :resource)
+    end
+
+    def send_resource disposition = :inline
+      send_data @source.resource, disposition: disposition, 
+        type: @source.mime_type, filename: (@source.title.presence || 'covid_hub_resource'),
+        stream: @source.mime_type == 'video/mp4'
     end
 end
