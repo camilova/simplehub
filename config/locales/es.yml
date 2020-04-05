@@ -21,3 +21,6 @@ es:
     order_sources_list:
       show_resource: Ver/reproducir la fuente
       download_resource: Decargar la fuente
+    index:
+      title: COVID-19 HUB
+      subtitle: GUÍA RÁPIDA DE PRÁCTICAS Y PROTOCOLOS
