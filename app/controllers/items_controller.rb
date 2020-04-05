@@ -5,8 +5,12 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @categories = Category.all
-    @category = Category.find_by_name(params[:category] || Category.default)
-    @items = Item.joins(:item_categories).where(item_categories: { category_id: [@category] })
+    @category = Category.find_by_name(params[:category] || Category.default.name)
+    if @category == Category.default
+      @items = Item.all
+    else
+      @items = Item.joins(:item_categories).where(item_categories: { category_id: [@category] })
+    end
   end
 
   # GET /items/1
