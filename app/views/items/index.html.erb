@@ -1,25 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col d-flex flex-column" style="max-height: 100vh">
-      <div class="row pr-3" style="height:4vh;z-index:2">
-        <div class="col-auto ml-auto">
-          <small>
-            <%= link_to '#' do %>
-              <%= fa_icon 'user' %>&nbsp;<%= t('.login') %>
-            <% end %>
-          </small>
-        </div>
-      </div>
-      <div class="row pt-1 bg-warning" style="margin-top:-4vh;z-index:1">
-        <div class="col text-center">
-          <h3><%= t('.title') %></h3>
-        </div>
-      </div>
-      <div class="row pb-1 bg-warning">
-        <div class="col text-center">
-          <h6><%= t('.subtitle') %></h6>
-        </div>
-      </div>
+      <%= render partial: 'layouts/header' %>
       <div class="row my-2">
         <div class="col-auto m-auto">
           <div class="list-group list-group-horizontal">
