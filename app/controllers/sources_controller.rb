@@ -78,6 +78,6 @@ class SourcesController < ApplicationController
 
     def send_resource disposition = :inline
       send_data @source.resource, disposition: disposition, 
-        type: @source.mime_type, range: (@source.mime_type == 'video/mp4')
+        type: @source.mime_type, range: @source.streaming?
     end
 end
