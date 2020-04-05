@@ -47,4 +47,13 @@ class ApplicationController < ActionController::Base
         lg.in?(AVAILABLE_LANGUAGES) ? lg : nil
       end
     end
+
+    def render **options
+      if options[:partial] && options[:callback]
+        html = render_to_string("_#{options[:partial]}", layout: false)
+        render json: html.to_json, callback: options[:callback]
+      else
+        super(options)
+      end
+    end
 end
