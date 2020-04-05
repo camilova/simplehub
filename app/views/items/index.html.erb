@@ -9,7 +9,11 @@
       </div>
       <div class="row flex-grow-1 justify-content-center overflow-auto">
         <div class="col-xs-12 col-sm-11 col-xl-7">
-          <%= render partial: 'items_list', locals: { items: @items } %>
+          <ul class="list-group" id="items_list">
+            <% @items.each do |item| %>
+              <%= render partial: 'item', locals: { item: item } %>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
