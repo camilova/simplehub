@@ -1,0 +1,4 @@
+<%= link_to items_path(category: category.name),
+  class: "list-group-item list-group-item-action #{ 'active' if active }" do %>
+  <%= category.name %>
+<% end %>

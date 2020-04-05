@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_05_161244) do
+ActiveRecord::Schema.define(version: 2020_04_05_171158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "item_categories", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_item_categories_on_category_id"
+    t.index ["item_id"], name: "index_item_categories_on_item_id"
+  end
 
   create_table "item_orders", force: :cascade do |t|
     t.bigint "item_id"
@@ -78,6 +93,8 @@ ActiveRecord::Schema.define(version: 2020_04_05_161244) do
     t.index ["sources_id"], name: "index_sources_of_orders_on_sources_id"
   end
 
+  add_foreign_key "item_categories", "categories"
+  add_foreign_key "item_categories", "items"
   add_foreign_key "orders_of_items", "items", column: "items_id"
   add_foreign_key "orders_of_items", "orders", column: "orders_id"
   add_foreign_key "sources_of_orders", "orders", column: "orders_id"

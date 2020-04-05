@@ -4,7 +4,9 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @categories = Category.all
+    @category = Category.find_by_name(params[:category] || Category.default)
+    @items = Item.joins(:item_categories).where(item_categories: { category_id: [@category] })
   end
 
   # GET /items/1
