@@ -1,0 +1,32 @@
+es:
+  simple_form:
+    "yes": 'Sí'
+    "no": 'No'
+    required:
+      text: 'requerido'
+      mark: '*'
+    error_notification:
+      default_message: "Por favor complete los campos con errores:"
+    labels:
+      defaults:
+        password: 'Contraseña'
+        title: 'Título'
+        link: 'Link al Recurso'
+        resource: 'Archivo de Recurso'
+      source:
+        edit:
+          orders: Órdenes Relacionadas
+          uploaded_file: Archivo de Recurso
+        new:
+          orders: Órdenes Relacionadas
+          uploaded_file: Archivo de Recurso
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'

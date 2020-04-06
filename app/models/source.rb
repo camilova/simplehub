@@ -1,7 +1,9 @@
 class Source < ApplicationRecord
   has_many :order_sources, dependent: :destroy
-  has_many :orders, through: :order_sourcescler
+  has_many :orders, through: :order_sources
   default_scope { order(created_at: :desc) }
+  before_save :set_resource_data
+  attr_accessor :uploaded_file
 
   def video?
     mime_type.present? && mime_type.include?('video')
@@ -22,4 +24,16 @@ class Source < ApplicationRecord
   def streaming?
     video? || audio?
   end
+
+  private
+
+    def set_resource_data
+      if uploaded_file.present?
+        require 'mime/types'
+        tempfile = uploaded_file.tempfile
+        mime_type = MIME::Types.type_for(tempfile.path).first.content_type
+        self.resource = tempfile.read
+        self.mime_type = mime_type
+      end
+    end
 end

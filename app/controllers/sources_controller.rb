@@ -1,8 +1,8 @@
 class SourcesController < ApplicationController
+  before_action :set_item_order, only: [:new, :edit, :create, :update]
   before_action :set_source, only: [:show, :download, :edit, :update, :destroy]
 
   # GET /sources
-  # GET /sources.json
   def index
     @sources = Source.all
   end
@@ -13,45 +13,42 @@ class SourcesController < ApplicationController
   end
 
   def download
-    send_resource :attachment
+    if @source.allow_download?
+      send_resource :attachment
+    else
+      head :forbidden
+    end
   end
 
   # GET /sources/new
   def new
     @source = Source.new
+    render partial: 'form', callback: 'modal', 
+      locals: { item: @item, order: @order }
   end
 
   # GET /sources/1/edit
   def edit
+    render partial: 'form', callback: 'modal', 
+      locals: { item: @item, order: @order }
   end
 
   # POST /sources
-  # POST /sources.json
   def create
     @source = Source.new(source_params)
-
-    respond_to do |format|
-      if @source.save
-        format.html { redirect_to @source, notice: 'Source was successfully created.' }
-        format.json { render :show, status: :created, location: @source }
-      else
-        format.html { render :new }
-        format.json { render json: @source.errors, status: :unprocessable_entity }
-      end
+    if @source.save
+      redirect_to administration_path(item: @item.id, order: @order.id)
+    else
+      head :internal_server_error
     end
   end
 
   # PATCH/PUT /sources/1
-  # PATCH/PUT /sources/1.json
   def update
-    respond_to do |format|
-      if @source.update(source_params)
-        format.html { redirect_to @source, notice: 'Source was successfully updated.' }
-        format.json { render :show, status: :ok, location: @source }
-      else
-        format.html { render :edit }
-        format.json { render json: @source.errors, status: :unprocessable_entity }
-      end
+    if @source.update(source_params)
+      redirect_to administration_path(item: @item.id, order: @order.id)
+    else
+      head :internal_server_error
     end
   end
 
@@ -71,9 +68,13 @@ class SourcesController < ApplicationController
       @source = Source.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    def set_item_order
+      @item = Item.find((params[:source].presence || params)[:item])
+      @order = Order.find((params[:source].presence || params)[:order])
+    end
+
     def source_params
-      params.require(:source).permit(:link, :resource)
+      params.require(:source).permit(:title, :link, :uploaded_file, { order_ids: [] })
     end
 
     def send_resource disposition = :inline

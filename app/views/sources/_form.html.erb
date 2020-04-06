@@ -1,27 +1,31 @@
-<%= form_with(model: source, local: true) do |form| %>
-  <% if source.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(source.errors.count, "error") %> prohibited this source from being saved:</h2>
-
-      <ul>
-      <% source.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="modal fade" id="source_form_modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= t((@source.persisted?? '.edit' : '.new')) %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @source, html: { id: "source_form" } do |f| %>
+          <%= f.error_notification %>
+          <%= hidden_field :source, :item, value: item.id %>
+          <%= hidden_field :source, :order, value: order.id %>
+          <%= f.input :title %>
+          <%= f.input :link %>
+          <%= f.input :uploaded_file, as: :file %>
+          <%= f.association :orders,
+            collection: item.orders,
+            as: :check_boxes, 
+            label_method: :description, 
+            value_method: :id %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button form="source_form" type="submit" class="btn btn-success"><%= t('save') %></button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t('cancel') %></button>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :link %>
-    <%= form.text_field :link %>
   </div>
-
-  <div class="field">
-    <%= form.label :resource %>
-    <%= form.text_field :resource %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

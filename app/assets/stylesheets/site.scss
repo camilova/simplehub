@@ -9,3 +9,7 @@ body {
 .clickable {
   cursor: pointer;
 }
+
+input[type='checkbox'].is-valid ~ label{
+  color: unset !important;
+}

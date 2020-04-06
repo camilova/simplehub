@@ -31,3 +31,9 @@ es:
       items: Temas
       orders: Órdenes/Indicaciones
       sources: Fuentes/Referencias
+  sources:
+    form:
+      edit: Editar Fuente
+      new: Agregar Fuente
+  cancel: Cancelar
+  save: Guardar
