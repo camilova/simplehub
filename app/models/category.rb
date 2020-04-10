@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  has_many :item_categories, dependent: :destroy
+  has_many :item_categories, dependent: :nullify
   has_many :items, through: :item_categories
   default_scope { order(:name) }
 

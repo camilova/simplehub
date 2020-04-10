@@ -3,6 +3,7 @@ class CreateSources < ActiveRecord::Migration[5.2]
     create_table :sources do |t|
       t.string :link
       t.binary :resource
+      t.references :order
 
       t.timestamps
     end

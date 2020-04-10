@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_05_171158) do
+ActiveRecord::Schema.define(version: 2020_04_10_202136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,15 +30,6 @@ ActiveRecord::Schema.define(version: 2020_04_05_171158) do
     t.index ["item_id"], name: "index_item_categories_on_item_id"
   end
 
-  create_table "item_orders", force: :cascade do |t|
-    t.bigint "item_id"
-    t.bigint "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_item_orders_on_item_id"
-    t.index ["order_id"], name: "index_item_orders_on_order_id"
-  end
-
   create_table "items", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -47,56 +38,30 @@ ActiveRecord::Schema.define(version: 2020_04_05_171158) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "order_sources", force: :cascade do |t|
-    t.bigint "order_id"
-    t.bigint "source_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_order_sources_on_order_id"
-    t.index ["source_id"], name: "index_order_sources_on_source_id"
-  end
-
   create_table "orders", force: :cascade do |t|
     t.string "description"
+    t.bigint "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "published_at"
     t.boolean "deprecated", default: false
     t.date "deprecated_at"
-  end
-
-  create_table "orders_of_items", force: :cascade do |t|
-    t.bigint "orders_id"
-    t.bigint "items_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["items_id"], name: "index_orders_of_items_on_items_id"
-    t.index ["orders_id"], name: "index_orders_of_items_on_orders_id"
+    t.index ["item_id"], name: "index_orders_on_item_id"
   end
 
   create_table "sources", force: :cascade do |t|
     t.string "link"
     t.binary "resource"
+    t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
     t.string "mime_type"
     t.boolean "allow_download", default: true
-  end
-
-  create_table "sources_of_orders", force: :cascade do |t|
-    t.bigint "sources_id"
-    t.bigint "orders_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["orders_id"], name: "index_sources_of_orders_on_orders_id"
-    t.index ["sources_id"], name: "index_sources_of_orders_on_sources_id"
+    t.boolean "deprecated", default: false
+    t.index ["order_id"], name: "index_sources_on_order_id"
   end
 
   add_foreign_key "item_categories", "categories"
   add_foreign_key "item_categories", "items"
-  add_foreign_key "orders_of_items", "items", column: "items_id"
-  add_foreign_key "orders_of_items", "orders", column: "orders_id"
-  add_foreign_key "sources_of_orders", "orders", column: "orders_id"
-  add_foreign_key "sources_of_orders", "sources", column: "sources_id"
 end

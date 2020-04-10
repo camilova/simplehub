@@ -1,6 +1,5 @@
 class Source < ApplicationRecord
-  has_many :order_sources, dependent: :destroy
-  has_many :orders, through: :order_sources
+  belongs_to :order
   default_scope { order(created_at: :desc) }
   before_save :set_resource_data
   attr_accessor :uploaded_file
