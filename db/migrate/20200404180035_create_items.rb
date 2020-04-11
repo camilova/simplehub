@@ -7,7 +7,7 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.boolean :deprecated, default: false
       t.date :deprecated_at
       t.boolean :approved, default: true
-      t.references :item
+      t.references :item, foreign_key: true
       t.boolean :deleted, default: false
 
       t.timestamps

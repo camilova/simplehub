@@ -7,7 +7,7 @@ class CreateSources < ActiveRecord::Migration[5.2]
       t.string :mime_type
       t.boolean :deprecated, default: false
       t.boolean :approved, default: true
-      t.references :item
+      t.references :item, foreign_key: true
       t.boolean :allow_download, default: true
 
       t.timestamps
