@@ -7,9 +7,9 @@ class ItemsController < ApplicationController
     @categories = Category.all
     @category = Category.find_by_name(params[:category] || Category.default.name)
     if @category == Category.default
-      @items = Item.all
+      @items = Item.main.all
     else
-      @items = Item.joins(:item_categories).where(item_categories: { category_id: [@category] })
+      @items = Item.main.joins(:item_categories).where(item_categories: { category_id: [@category] })
     end
   end
 

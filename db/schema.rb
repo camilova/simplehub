@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_202136) do
+ActiveRecord::Schema.define(version: 2020_04_11_025033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,33 +33,30 @@ ActiveRecord::Schema.define(version: 2020_04_10_202136) do
   create_table "items", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.binary "icon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "orders", force: :cascade do |t|
-    t.string "description"
-    t.bigint "item_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.date "published_at"
-    t.boolean "deprecated", default: false
+    t.boolean "deprecated"
     t.date "deprecated_at"
-    t.index ["item_id"], name: "index_orders_on_item_id"
+    t.boolean "approved"
+    t.bigint "item_id"
+    t.boolean "deleted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_items_on_item_id"
   end
 
   create_table "sources", force: :cascade do |t|
+    t.string "title"
     t.string "link"
     t.binary "resource"
-    t.bigint "order_id"
+    t.string "mime_type"
+    t.boolean "deprecated"
+    t.boolean "approved"
+    t.bigint "item_id"
+    t.boolean "allow_download", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
-    t.string "mime_type"
-    t.boolean "allow_download", default: true
-    t.boolean "deprecated", default: false
-    t.index ["order_id"], name: "index_sources_on_order_id"
+    t.boolean "deleted"
+    t.index ["item_id"], name: "index_sources_on_item_id"
   end
 
   add_foreign_key "item_categories", "categories"

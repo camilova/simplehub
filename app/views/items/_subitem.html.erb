@@ -1,0 +1,22 @@
+<li class="list-group-item <%= 'text-line-through text-secondary bg-light' if subitem.deprecated? %>">
+  <div class="d-flex w-100 justify-content-between">
+    <h6 class="mb-1"><%= subitem.title %></h6>
+    <% if subitem.description.present? %>
+      <p class="mb-1"><%= subitem.description %></p>
+    <% end %>
+    <% if subitem.deprecated? %>
+      <small class="ml-auto mr-2">
+        <span class="badge badge-secondary badge-pill"><%= "En Desuso" %></span>
+      </small>
+    <% end %>
+    <% published_at = subitem.published_at.presence || Date.today %>
+    <small title="<%= l(published_at, format: :long) %>">
+      <%= l(published_at, format: :short) %>
+    </small>
+  </div>
+  <ul class="mt-2">
+    <% subitem.sources.each do |source| %>
+      <%= render partial: 'source', locals: { source: source } %>
+    <% end %>
+  </ul>
+</li>

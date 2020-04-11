@@ -1,6 +1,6 @@
 class Source < ApplicationRecord
-  belongs_to :order
-  default_scope { order(created_at: :desc) }
+  belongs_to :item
+  default_scope { where(deleted: false).order(created_at: :desc) }
   before_save :set_resource_data
   attr_accessor :uploaded_file
 

@@ -4,7 +4,7 @@
       <div class="col">
         <% if source.link.present? %>
           <%= link_to (source.title.presence || source.link), source.link,
-            target: '_blank', class: (order.deprecated?? 'text-secondary' : '')
+            target: '_blank', class: (source.deprecated?? 'text-secondary' : '')
           %>
         <% else %>
           <%= source.title %>
