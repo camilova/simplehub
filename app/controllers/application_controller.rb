@@ -50,7 +50,9 @@ class ApplicationController < ActionController::Base
 
     def render **options
       if options[:partial] && options[:callback]
-        html = render_to_string("_#{options[:partial]}", 
+        parts = options[:partial].split('/')
+        parts[parts.length - 1] = "_#{parts.last}"
+        html = render_to_string(parts.join('/'), 
           layout: false, locals: (options[:locals].presence || {}))
         render json: html.to_json, callback: options[:callback]
       else

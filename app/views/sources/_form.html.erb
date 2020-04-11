@@ -8,18 +8,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for @source, html: { id: "source_form" } do |f| %>
+        <%= simple_form_for @source, html: { id: "source_form" }, remote: true do |f| %>
           <%= f.error_notification %>
           <%= hidden_field :source, :item, value: item.id %>
-          <%= hidden_field :source, :order, value: order.id %>
           <%= f.input :title %>
           <%= f.input :link %>
           <%= f.input :uploaded_file, as: :file %>
-          <%= f.association :orders,
-            collection: item.orders,
-            as: :check_boxes, 
-            label_method: :description, 
-            value_method: :id %>
+          <%= f.input :deprecated %>
+          <%= f.input :allow_download %>
         <% end %>
       </div>
       <div class="modal-footer">

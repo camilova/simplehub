@@ -1,10 +1,10 @@
-<li class="">
+<li id="source-<%= source.id %>">
   <div class="container-fluid p-0">
     <div class="row">
       <div class="col">
         <% if source.link.present? %>
           <%= link_to (source.title.presence || source.link), source.link,
-            target: '_blank', class: (source.deprecated?? 'text-secondary' : '')
+            target: '_blank', class: (source.deprecated?? 'text-line-through text-secondary' : '')
           %>
         <% else %>
           <%= source.title %>
@@ -12,6 +12,12 @@
       </div>
       <div class="col-auto">
         <div class="btn-group btn-group-sm" role="group" aria-label="View Source">
+          <%= link_to edit_source_path(source, item: source.item.id),
+            remote: true, 
+            title: t('.edit'),
+            class: "btn btn-light" do %>
+            <%= fa_icon 'pencil' %>
+          <% end %>
           <%= link_to source_path(source), 
             class: "btn btn-light", 
             title: t('.show_resource'),
@@ -31,6 +37,11 @@
               class: "btn btn-light" do %>
               <%= fa_icon 'download' %>
             <% end %>
+          <% end %>
+          <%= link_to history_source_path(source), 
+            title: t('.history_source'),
+            class: "btn btn-light" do %>
+            <%= fa_icon 'history' %>
           <% end %>
         </div>
       </div>

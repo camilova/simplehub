@@ -21,6 +21,15 @@ es:
     source:
       show_resource: Ver/reproducir la fuente
       download_resource: Decargar la fuente
+      history_source: Ver el historial de versiones
+      edit: Editar esta fuente
+    item:
+      edit: Editar este titulo
+    subitem:
+      edit: Editar este subtítulo
+    form:
+      edit: Editar Título
+      new: Nuevo Título
   layouts:
     header:
       title: COVID-19 HUB

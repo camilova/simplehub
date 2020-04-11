@@ -8,4 +8,18 @@ class Item < ApplicationRecord
   scope :actives, -> { where(deprecated: false) }
   scope :deprecated, -> { where(deprecated: true) }
   scope :main, -> { where(item: nil) }
+  after_save :set_deprecated_on_sources
+
+  def main?
+    items.any?
+  end
+
+  private
+
+    def set_deprecated_on_sources
+      sources.each do |source|
+        source.deprecated = deprecated
+        source.save!
+      end
+    end
 end

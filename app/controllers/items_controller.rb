@@ -25,6 +25,8 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    render partial: 'form', callback: 'modal', 
+      locals: { item: @item, main_item: @item.item.presence || Item.new }
   end
 
   # POST /items
@@ -44,16 +46,13 @@ class ItemsController < ApplicationController
   end
 
   # PATCH/PUT /items/1
-  # PATCH/PUT /items/1.json
   def update
-    respond_to do |format|
-      if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
-      else
-        format.html { render :edit }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+    if @item.update(item_params)
+      object_name = (@item.main?? 'item' : 'subitem')
+      render partial: object_name, callback: 'replace',
+        locals: { "#{object_name}": @item }
+    else
+      head :internal_server_error
     end
   end
 
@@ -75,6 +74,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:title, :description, :icon)
+      params.require(:item).permit(:title, :description, :deprecated)
     end
 end

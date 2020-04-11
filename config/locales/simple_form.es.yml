@@ -14,12 +14,14 @@ es:
         link: 'Link al Recurso'
         resource: 'Archivo de Recurso'
       source:
-        edit:
-          orders: Órdenes Relacionadas
-          uploaded_file: Archivo de Recurso
-        new:
-          orders: Órdenes Relacionadas
-          uploaded_file: Archivo de Recurso
+        orders: Órdenes Relacionadas
+        uploaded_file: Archivo de Recurso
+        deprecated: Dar de Baja
+        allow_download: Permitir Descargar el Recurso
+      item:
+        title: Título
+        description: Descripción (Opcional)
+        deprecated: Dar de Baja
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'

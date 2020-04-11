@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'items#index'
   resources :sources
   get 'sources/:id/download', to: 'sources#download', as: 'download_source'
+  get 'sources/:id/history', to: 'sources#history', as: 'history_source'
   resources :orders
   resources :items
   get 'administration', to: 'administration#index', as: 'administration'

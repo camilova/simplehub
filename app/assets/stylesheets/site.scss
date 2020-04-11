@@ -6,6 +6,10 @@ body {
   text-decoration: line-through;
 }
 
+.no-wrap {
+  white-space: nowrap;
+}
+
 .clickable {
   cursor: pointer;
 }

@@ -24,20 +24,20 @@ class SourcesController < ApplicationController
   def new
     @source = Source.new
     render partial: 'form', callback: 'modal', 
-      locals: { item: @item, order: @order }
+      locals: { item: @item }
   end
 
   # GET /sources/1/edit
   def edit
     render partial: 'form', callback: 'modal', 
-      locals: { item: @item, order: @order }
+      locals: { item: @item }
   end
 
   # POST /sources
   def create
     @source = Source.new(source_params)
     if @source.save
-      redirect_to administration_path(item: @item.id, order: @order.id)
+      head :ok
     else
       head :internal_server_error
     end
@@ -46,7 +46,7 @@ class SourcesController < ApplicationController
   # PATCH/PUT /sources/1
   def update
     if @source.update(source_params)
-      redirect_to administration_path(item: @item.id, order: @order.id)
+      render partial: 'sources/source', callback: 'replace', locals: { source: @source }
     else
       head :internal_server_error
     end
@@ -70,11 +70,10 @@ class SourcesController < ApplicationController
 
     def set_item_order
       @item = Item.find((params[:source].presence || params)[:item])
-      @order = Order.find((params[:source].presence || params)[:order])
     end
 
     def source_params
-      params.require(:source).permit(:title, :link, :uploaded_file, { order_ids: [] })
+      params.require(:source).permit(:title, :link, :uploaded_file, :deprecated, :allow_download)
     end
 
     def send_resource disposition = :inline
