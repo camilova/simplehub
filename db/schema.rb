@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_11_025033) do
+ActiveRecord::Schema.define(version: 2020_04_11_043816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,14 +34,25 @@ ActiveRecord::Schema.define(version: 2020_04_11_025033) do
     t.string "title"
     t.string "description"
     t.date "published_at"
-    t.boolean "deprecated"
+    t.boolean "deprecated", default: false
     t.date "deprecated_at"
-    t.boolean "approved"
+    t.boolean "approved", default: true
     t.bigint "item_id"
-    t.boolean "deleted"
+    t.boolean "deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_items_on_item_id"
+  end
+
+  create_table "source_versions", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.bigint "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.json "object"
+    t.json "object_changes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sources", force: :cascade do |t|
@@ -49,16 +60,18 @@ ActiveRecord::Schema.define(version: 2020_04_11_025033) do
     t.string "link"
     t.binary "resource"
     t.string "mime_type"
-    t.boolean "deprecated"
-    t.boolean "approved"
+    t.boolean "deprecated", default: false
+    t.boolean "approved", default: true
     t.bigint "item_id"
     t.boolean "allow_download", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "deleted"
+    t.boolean "deleted", default: false
     t.index ["item_id"], name: "index_sources_on_item_id"
   end
 
   add_foreign_key "item_categories", "categories"
   add_foreign_key "item_categories", "items"
+  add_foreign_key "items", "items"
+  add_foreign_key "sources", "items"
 end

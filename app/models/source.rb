@@ -3,6 +3,9 @@ class Source < ApplicationRecord
   default_scope { where(deleted: false).order(created_at: :desc) }
   before_save :set_resource_data
   attr_accessor :uploaded_file
+  has_paper_trail versions: {
+    class_name: 'SourceVersion'
+  }
 
   def video?
     mime_type.present? && mime_type.include?('video')
