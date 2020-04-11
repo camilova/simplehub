@@ -12,8 +12,14 @@
     <span class="badge badge-primary badge-pill"><%= item.items.actives.count %></span>
   </div>
   <p class="mb-1 clickable"><%= item.description %></p>
-  <div class="collapse mt-3" id="<%= detail_div_id %>">
+  <div class="collapse mt-3 pt-1" id="<%= detail_div_id %>">
     <div class="card card-body">
+      <ul class="">
+        <% item.sources.each do |source| %>
+          <%= render partial: 'source', locals: { source: source } %>
+        <% end %>
+      </ul>
+      <div class="w-100 border-bottom my-2"></div>
       <ul class="list-group list-group-flush">
         <% item.items.each do |subitem| %>
           <%= render partial: 'subitem', locals: { subitem: subitem } %>
