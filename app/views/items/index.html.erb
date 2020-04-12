@@ -18,11 +18,20 @@
       </div>
       <div class="row flex-grow-1 justify-content-center overflow-auto">
         <div class="col-xs-12 col-sm-11 col-xl-7">
-          <ul class="list-group" id="items_list">
-            <% @items.each do |item| %>
-              <%= render partial: 'item', locals: { item: item } %>
-            <% end %>
-          </ul>
+          <div class="row my-2">
+            <div class="col">
+              <%= link_to t('.new_item'), new_item_path(category: @category.name), remote: true %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <ul class="list-group" id="items_list">
+                <% @items.each do |item| %>
+                  <%= render partial: 'item', locals: { item: item } %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>

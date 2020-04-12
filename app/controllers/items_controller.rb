@@ -1,12 +1,13 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_main_item, only: [:new]
+  before_action :set_category, only: [:new, :index]
 
   # GET /items
   # GET /items.json
   def index
     @categories = Category.all
-    @category = Category.find_by_name(params[:category] || Category.default.name)
+    @category ||= Category.default.name
     if @category == Category.default
       @items = Item.main.all
     else
@@ -23,6 +24,7 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.item = @main_item
+    @item.categories << @category unless @category.nil? || @category == Category.default
     render partial: 'form', callback: 'modal', 
       locals: { item: @item }
   end
@@ -69,7 +71,7 @@ class ItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    
     def set_item
       @item = Item.find(params[:id])
     end
@@ -78,7 +80,10 @@ class ItemsController < ApplicationController
       @main_item = Item.find(params[:item]) if params[:item].present?
     end
 
-    # Only allow a list of trusted parameters through.
+    def set_category
+      @category = Category.find_by_name(params[:category])
+    end
+
     def item_params
       params.require(:item).permit(:title, :description, :deprecated, :item_id, category_ids: [])
     end

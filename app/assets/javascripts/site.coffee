@@ -22,6 +22,11 @@
     parent = $("##{data.data('parent')}")
     list = parent.find('.subitems-list')
     prepend(data, list)
+  
+  window.prependItem = (data) ->
+    data = $(data)
+    list = $('#items_list')
+    prepend(data, list)
 
   $(document).on 'click', '#items_list > li', (event) ->
     if $(event.target).is(".clickable:not('a')")

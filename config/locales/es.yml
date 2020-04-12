@@ -20,6 +20,7 @@ es:
   items:
     index:
       new_category: Agregar nueva categoría
+      new_item: Agregar Tema Principal
     item:
       edit: Editar este titulo
       new_subitem: Agregar Subtema

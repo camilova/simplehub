@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   after_save :set_deprecated_on_sources
 
   def main?
-    items.any?
+    items.any? || item.nil?
   end
 
   private
