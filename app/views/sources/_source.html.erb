@@ -1,13 +1,15 @@
-<li id="source-<%= source.id %>">
+<li id="source-<%= source.id %>"
+  data-parent="<%= "item-#{item.id}" %>">
   <div class="container-fluid p-0">
     <div class="row">
       <div class="col">
+        <% css = (source.deprecated?? 'text-line-through text-secondary' : '') %>
         <% if source.link.present? %>
           <%= link_to (source.title.presence || source.link), source.link,
-            target: '_blank', class: (source.deprecated?? 'text-line-through text-secondary' : '')
+            target: '_blank', class: css
           %>
         <% else %>
-          <%= source.title %>
+          <span class="<%= css %>"><%= source.title %></span>
         <% end %>
       </div>
       <div class="col-auto">
@@ -39,7 +41,7 @@
             <% end %>
           <% end %>
           <%= link_to history_source_path(source), 
-            title: t('.history_source'),
+            title: t('.history'),
             class: "btn btn-light" do %>
             <%= fa_icon 'history' %>
           <% end %>

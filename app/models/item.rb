@@ -4,7 +4,8 @@ class Item < ApplicationRecord
   has_many :item_categories
   has_many :categories, through: :item_categories
   has_many :sources, dependent: :nullify
-  default_scope -> { where(deleted: false).order(:deprecated, published_at: :desc) }
+  default_scope -> { where(deleted: false).
+    order(:deprecated, published_at: :desc, created_at: :desc) }
   scope :actives, -> { where(deprecated: false) }
   scope :deprecated, -> { where(deprecated: true) }
   scope :main, -> { where(item: nil) }

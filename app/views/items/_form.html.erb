@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><%= t((item.persisted?? '.edit' : '.new')) %></h5>
+        <h5 class="modal-title"><%= t((item.persisted?? '.edit' : (item.main?? '.new' : '.new_subitem'))) %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -10,10 +10,13 @@
       <div class="modal-body">
         <%= simple_form_for item, html: { id: "item_form" }, remote: true do |f| %>
           <%= f.error_notification %>
-          <%= hidden_field :item, :item, value: main_item.id %>
+          <%= hidden_field :item, :item_id, value: item.item.id if item.item.present? %>
           <%= f.input :title, as: :text %>
           <%= f.input :description, as: :text %>
           <%= f.input :deprecated unless item.main? %>
+          <% if item.main? %>
+            <%= f.association :categories, as: :check_boxes %>
+          <% end %>
         <% end %>
       </div>
       <div class="modal-footer">

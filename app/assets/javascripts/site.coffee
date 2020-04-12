@@ -7,6 +7,22 @@
       container.attr(attribute, data.attr(attribute))
     container.html(data.html())
 
+  window.prepend = (data, list) ->
+    data = $(data)
+    list.first().prepend(data)
+
+  window.prependSource = (data) ->
+    data = $(data)
+    parent = $("##{data.data('parent')}")
+    list = parent.find('.sources-list')
+    prepend(data, list)
+  
+  window.prependSubitem = (data) ->
+    data = $(data)
+    parent = $("##{data.data('parent')}")
+    list = parent.find('.subitems-list')
+    prepend(data, list)
+
   $(document).on 'click', '#items_list > li', (event) ->
     if $(event.target).is(".clickable:not('a')")
       event.preventDefault()

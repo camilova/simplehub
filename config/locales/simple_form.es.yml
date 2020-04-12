@@ -22,6 +22,7 @@ es:
         title: Título
         description: Descripción (Opcional)
         deprecated: Dar de Baja
+        categories: Categorías
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'

@@ -1,6 +1,6 @@
 class Source < ApplicationRecord
   belongs_to :item
-  default_scope { where(deleted: false).order(created_at: :desc) }
+  default_scope { where(deleted: false).order(:deprecated, created_at: :desc) }
   before_save :set_resource_data
   attr_accessor :uploaded_file
   has_paper_trail versions: {
@@ -34,7 +34,7 @@ class Source < ApplicationRecord
         require 'mime/types'
         tempfile = uploaded_file.tempfile
         mime_type = MIME::Types.type_for(tempfile.path).first.content_type
-        self.resource = tempfile.read
+        self.resource = nil #tempfile.read
         self.mime_type = mime_type
       end
     end

@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_main_item, only: [:new]
 
   # GET /items
   # GET /items.json
@@ -21,27 +22,28 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    @item.item = @main_item
+    render partial: 'form', callback: 'modal', 
+      locals: { item: @item }
   end
 
   # GET /items/1/edit
   def edit
     render partial: 'form', callback: 'modal', 
-      locals: { item: @item, main_item: @item.item.presence || Item.new }
+      locals: { item: @item }
   end
 
   # POST /items
   # POST /items.json
   def create
     @item = Item.new(item_params)
-
-    respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
-      else
-        format.html { render :new }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+    @item.published_at = Date.today
+    if @item.save
+      object_name = (@item.main?? 'item' : 'subitem')
+      render partial: object_name, callback: "prepend#{object_name.capitalize}",
+        locals: { "#{object_name}": @item }
+    else
+      head :internal_server_error
     end
   end
 
@@ -72,8 +74,12 @@ class ItemsController < ApplicationController
       @item = Item.find(params[:id])
     end
 
+    def set_main_item
+      @main_item = Item.find(params[:item]) if params[:item].present?
+    end
+
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:title, :description, :deprecated)
+      params.require(:item).permit(:title, :description, :deprecated, :item_id, category_ids: [])
     end
 end

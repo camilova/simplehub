@@ -17,3 +17,11 @@ body {
 input[type='checkbox'].is-valid ~ label{
   color: unset !important;
 }
+
+.font-size-90 {
+  font-size: 90%;
+}
+
+.list-style-none {
+  list-style: none;
+}

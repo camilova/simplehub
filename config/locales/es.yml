@@ -18,31 +18,31 @@ es:
       long: "%H:%M:%S del %d de %B de %Y"
       default: "%d-%m-%Y %H:%M:%S"
   items:
-    source:
-      show_resource: Ver/reproducir la fuente
-      download_resource: Decargar la fuente
-      history_source: Ver el historial de versiones
-      edit: Editar esta fuente
     item:
       edit: Editar este titulo
+      new_subitem: Agregar Subtema
+      new_source: Agregar Recurso
     subitem:
       edit: Editar este subtítulo
+      new: + Agregar Recurso
     form:
       edit: Editar Título
       new: Nuevo Título
+      new_subitem: Nuevo Subtítulo
   layouts:
     header:
       title: COVID-19 HUB
       subtitle: GUÍA REFERENCIA DE PRÁCTICAS Y PROTOCOLOS
       login: Iniciar Sesión
-  administration:
-    index:
-      items: Temas
-      orders: Órdenes/Indicaciones
-      sources: Fuentes/Referencias
   sources:
     form:
-      edit: Editar Fuente
-      new: Agregar Fuente
+      edit: Editar Recurso
+      new: Agregar Recurso
+    source:
+      history: Ver historial de cambios
+      show_resource: Ver/reproducir la fuente
+      download_resource: Decargar la fuente
+      history_source: Ver el historial de versiones
+      edit: Editar esta fuente
   cancel: Cancelar
   save: Guardar

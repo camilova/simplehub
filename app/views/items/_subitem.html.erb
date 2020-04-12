@@ -1,9 +1,11 @@
-<li id="subitem-<%= subitem.id %>" class="list-group-item px-0 <%= 'text-secondary bg-light' if subitem.deprecated? %>">
+<li id="item-<%= subitem.id %>"
+  data-parent="<%= "item-#{subitem.item.id}" %>"
+  class="list-group-item px-0 <%= 'text-secondary bg-light' if subitem.deprecated? %>">
   <div class="d-flex w-100">
     <div class="mb-1 mr-1 <%= 'text-line-through' if subitem.deprecated? %>">
       <h6><%= subitem.title %></h6>
       <% if subitem.description.present? %>
-        <p class="mb-1"><%= subitem.description %></p>
+        <p class="mb-1 font-size-90"><%= subitem.description %></p>
       <% end %>
     </div>
     <div class="align-self-top ml-auto no-wrap">
@@ -26,9 +28,16 @@
       </div>
     </div>
   </div>
-  <ul class="mt-2">
+  <ul class="mt-2 sources-list">
     <% subitem.sources.each do |source| %>
-      <%= render partial: 'sources/source', locals: { source: source } %>
+      <%= render partial: 'sources/source', locals: { source: source, item: subitem } %>
+    <% end %>
+    <% unless subitem.deprecated? %>
+      <li class="list-style-none">
+        <small>
+          <%= link_to t('.new'), new_source_path(item: subitem.id), remote: true, type: :post %>
+        </small>
+      </li>
     <% end %>
   </ul>
 </li>

@@ -10,7 +10,7 @@
       <div class="modal-body">
         <%= simple_form_for @source, html: { id: "source_form" }, remote: true do |f| %>
           <%= f.error_notification %>
-          <%= hidden_field :source, :item, value: item.id %>
+          <%= hidden_field :source, :item_id, value: @source.item.id if @source.item.present? %>
           <%= f.input :title %>
           <%= f.input :link %>
           <%= f.input :uploaded_file, as: :file %>
