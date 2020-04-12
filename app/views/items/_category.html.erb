@@ -1,4 +1,13 @@
+<% classes = "list-group-item list-group-item-action #{ 'active' if active }" %>
 <%= link_to items_path(category: category.name),
-  class: "list-group-item list-group-item-action #{ 'active' if active }" do %>
+  style: 'border-right: none',
+  class: classes do %>
   <%= category.name %>
+<% end %>
+<%= link_to edit_category_path(category), 
+  title: t('.edit'),
+  remote: true,
+  style: 'border-left: none',
+  class: classes + ' px-2' do %>
+  <%= fa_icon 'pencil' %>
 <% end %>
