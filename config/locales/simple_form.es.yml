@@ -23,6 +23,8 @@ es:
         description: Descripción (Opcional)
         deprecated: Dar de Baja
         categories: Categorías
+      category:
+        name: Nombre
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'

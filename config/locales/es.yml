@@ -18,6 +18,8 @@ es:
       long: "%H:%M:%S del %d de %B de %Y"
       default: "%d-%m-%Y %H:%M:%S"
   items:
+    index:
+      new_category: Agregar nueva categoría
     item:
       edit: Editar este titulo
       new_subitem: Agregar Subtema
@@ -44,5 +46,9 @@ es:
       download_resource: Decargar la fuente
       history_source: Ver el historial de versiones
       edit: Editar esta fuente
+  categories:
+    form:
+      edit: Editar Categoría
+      new: Nueva Categoría
   cancel: Cancelar
   save: Guardar

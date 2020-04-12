@@ -1,22 +1,22 @@
-<%= form_with(model: category, local: true) do |form| %>
-  <% if category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
-
-      <ul>
-      <% category.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="modal fade" id="source_form_modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= t((@category.persisted?? '.edit' : '.new')) %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @category, html: { id: "category_form" }, remote: true do |f| %>
+          <%= f.error_notification %>
+          <%= f.input :name %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button form="category_form" type="submit" class="btn btn-success"><%= t('save') %></button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t('cancel') %></button>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
