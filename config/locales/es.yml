@@ -31,6 +31,8 @@ es:
       edit: Editar Título
       new: Nuevo Título
       new_subitem: Nuevo Subtítulo
+    category:
+      edit: Editar esta categoría
   layouts:
     header:
       title: COVID-19 HUB
