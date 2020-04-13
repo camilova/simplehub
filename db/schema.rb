@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_11_043816) do
+ActiveRecord::Schema.define(version: 2020_04_13_013555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 2020_04_11_043816) do
   create_table "sources", force: :cascade do |t|
     t.string "title"
     t.string "link"
-    t.binary "resource"
     t.string "mime_type"
     t.boolean "deprecated", default: false
     t.boolean "approved", default: true
@@ -67,6 +66,8 @@ ActiveRecord::Schema.define(version: 2020_04_11_043816) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "deleted", default: false
+    t.binary "resource_binary"
+    t.text "resource64"
     t.index ["item_id"], name: "index_sources_on_item_id"
   end
 
