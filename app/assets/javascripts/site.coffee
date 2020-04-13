@@ -41,5 +41,17 @@
   $(document).on 'ajax:success', '.modal form[data-remote=true]', (event) ->
     modal = $(event.target).closest('.modal')
     modal.modal('hide')
+  
+  getItem = (event) ->
+    collapsable_element = $(event.target)
+    item = collapsable_element.closest("li[id*='item-']")
+
+  $(document).on 'shown.bs.collapse', '.collapse', (event) ->
+    item = getItem(event)
+    item.addClass('selected')
+  
+  $(document).on 'hidden.bs.collapse', '.collapse', (event) ->
+    item = getItem(event)
+    item.removeClass('selected')
 
 )(jQuery)
