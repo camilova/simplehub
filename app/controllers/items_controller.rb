@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
   before_action :set_category, only: [:new, :index]
 
   # GET /items
-  # GET /items.json
   def index
     @categories = Category.all
     @category ||= Category.default.name
@@ -13,11 +12,6 @@ class ItemsController < ApplicationController
     else
       @items = Item.main.joins(:item_categories).where(item_categories: { category_id: [@category] })
     end
-  end
-
-  # GET /items/1
-  # GET /items/1.json
-  def show
   end
 
   # GET /items/new
@@ -36,7 +30,6 @@ class ItemsController < ApplicationController
   end
 
   # POST /items
-  # POST /items.json
   def create
     @item = Item.new(item_params)
     @item.published_at = Date.today
@@ -61,13 +54,8 @@ class ItemsController < ApplicationController
   end
 
   # DELETE /items/1
-  # DELETE /items/1.json
   def destroy
-    @item.destroy
-    respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @item.update!(deleted: true)
   end
 
   private

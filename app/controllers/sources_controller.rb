@@ -2,16 +2,12 @@ class SourcesController < ApplicationController
   before_action :set_item, only: [:new]
   before_action :set_source, only: [:show, :download, :edit, :update, :destroy]
 
-  # GET /sources
-  def index
-    @sources = Source.all
-  end
-
   # GET /sources/1
   def show
     send_resource
   end
 
+  # GET /sources/1/download
   def download
     if @source.allow_download?
       send_resource :attachment
@@ -54,17 +50,12 @@ class SourcesController < ApplicationController
   end
 
   # DELETE /sources/1
-  # DELETE /sources/1.json
   def destroy
-    @source.destroy
-    respond_to do |format|
-      format.html { redirect_to sources_url, notice: 'Source was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @source.updates!(deleted: true)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    
     def set_source
       @source = Source.find(params[:id])
     end
