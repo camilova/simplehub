@@ -3,11 +3,23 @@
   <div class="container-fluid p-0">
     <div class="row">
       <div class="col">
+        <% case true %>
+        <% when source.streaming? %>
+          <%= fa_icon 'play', class: 'mr-1' %>
+        <% when source.image? %>
+          <%= fa_icon 'image', class: 'mr-1' %>
+        <% else %>
+          <%= fa_icon 'file', class: 'mr-1' %>
+        <% end %>
         <% css = (source.deprecated?? 'text-line-through text-secondary' : '') %>
         <% if source.link.present? %>
           <%= link_to (source.title.presence || source.link), source.link,
             target: '_blank', class: css
           %>
+        <% elsif source.resource.present? %>
+          <%= link_to source.title, source_path(source), 
+            class: css, 
+            target: '_blank' %>
         <% else %>
           <span class="<%= css %>"><%= source.title %></span>
         <% end %>
@@ -19,19 +31,6 @@
             title: t('.edit'),
             class: "btn btn-light" do %>
             <%= fa_icon 'pencil' %>
-          <% end %>
-          <%= link_to source_path(source), 
-            class: "btn btn-light", 
-            title: t('.show_resource'),
-            target: '_blank' do %>
-            <% case true %>
-            <% when source.streaming? %>
-              <%= fa_icon 'play' %>
-            <% when source.image? %>
-              <%= fa_icon 'image' %>
-            <% else %>
-              <%= fa_icon 'file' %>
-            <% end %>
           <% end %>
           <% if source.allow_download? %>
             <%= link_to download_source_path(source), 

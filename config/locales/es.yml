@@ -45,7 +45,6 @@ es:
       new: Agregar Recurso
     source:
       history: Ver historial de cambios
-      show_resource: Ver/reproducir la fuente
       download_resource: Decargar la fuente
       history_source: Ver el historial de versiones
       edit: Editar esta fuente
