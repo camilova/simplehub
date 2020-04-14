@@ -15,7 +15,7 @@
           <%= f.input :description, as: :text %>
           <%= f.input :deprecated unless item.main? %>
           <% if item.main? %>
-            <%= f.association :categories, as: :check_boxes %>
+            <%= f.association :categories, collection: Category.selectable, as: :check_boxes %>
           <% end %>
         <% end %>
       </div>
