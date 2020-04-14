@@ -28,7 +28,10 @@ class Source < ApplicationRecord
 
   def resource
     require 'base64'
-    self.resource_binary || (Base64.decode64(self.resource64) if self.resource64.present?)
+    require "zlib"
+    data = self.resource_binary || 
+      (Base64.decode64(self.resource64) if self.resource64.present?)
+    Zlib::Inflate.inflate(data)
   end
 
   private
@@ -37,6 +40,7 @@ class Source < ApplicationRecord
       if uploaded_file.present?
         require 'mime/types'
         require 'base64'
+        require "zlib"
         tempfile = uploaded_file.tempfile
         mime_type_options = [MIME::Types.type_for(tempfile.path)].flatten
         if mime_type_options.count > 1
@@ -44,7 +48,7 @@ class Source < ApplicationRecord
         else
           mime_type = mime_type_options.first.to_s
         end
-        self.resource_binary = tempfile.read
+        self.resource_binary = Zlib::Deflate.deflate(tempfile.read)
         self.resource64 = Base64.encode64(self.resource_binary)
         self.mime_type = mime_type
       end
