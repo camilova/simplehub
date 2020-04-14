@@ -6,11 +6,11 @@ class ItemsController < ApplicationController
   # GET /items
   def index
     @categories = Category.all
-    @category ||= Category.default.name
+    @category ||= Category.default
     if @category == Category.default
       @items = Item.main.all
     else
-      @items = Item.main.joins(:item_categories).where(item_categories: { category_id: [@category] })
+      @items = Item.main.joins(:item_categories).where(item_categories: { category_id: [@category.id] })
     end
   end
 
