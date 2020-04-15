@@ -2,6 +2,18 @@ class ApplicationController < ActionController::Base
   AVAILABLE_LANGUAGES = [:en, :es]
   before_action :set_locale
 
+  def render **options
+    if options[:partial] && options[:callback]
+      parts = options[:partial].split('/')
+      parts[parts.length - 1] = "_#{parts.last}"
+      html = render_to_string(parts.join('/'), 
+        layout: false, locals: (options[:locals].presence || {}))
+      render json: html.to_json, callback: options[:callback]
+    else
+      super(options)
+    end
+  end
+
   private
 
     def send_data(data, options = {})
@@ -47,16 +59,5 @@ class ApplicationController < ActionController::Base
         lg.in?(AVAILABLE_LANGUAGES) ? lg : nil
       end
     end
-
-    def render **options
-      if options[:partial] && options[:callback]
-        parts = options[:partial].split('/')
-        parts[parts.length - 1] = "_#{parts.last}"
-        html = render_to_string(parts.join('/'), 
-          layout: false, locals: (options[:locals].presence || {}))
-        render json: html.to_json, callback: options[:callback]
-      else
-        super(options)
-      end
-    end
+    
 end

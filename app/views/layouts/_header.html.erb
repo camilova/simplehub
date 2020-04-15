@@ -1,15 +1,20 @@
-<div class="row pr-3" style="height:4vh;z-index:2">
-  <div class="col-auto ml-auto">
-    <small>
-      <%= link_to administration_path do %>
-        <%= fa_icon 'user' %>&nbsp;<%= t('.login') %>
-      <% end %>
-    </small>
-  </div>
-</div>
-<div class="row pt-1 bg-warning" style="margin-top:-4vh;z-index:1">
-  <div class="col text-center">
+<div class="row pt-1 bg-warning">
+  <div class="col-12 text-center">
     <h3><%= t('.title') %></h3>
+  </div>
+  <div class="col-auto text-right no-wrap" style="width:30%;margin-left:-30%;">
+    <% if user_signed_in? %>
+      <%= current_user.email %>
+      <%= link_to t('.log_out'),
+        destroy_user_session_path,
+        method: :delete,
+        class: 'ml-2 v-align-middle' %>
+    <% else %>
+    <%= link_to t('.log_in'),
+      new_user_session_path, 
+      remote: true,
+      class: 'modal-response v-align-middle' %>
+    <% end %>
   </div>
 </div>
 <div class="row pb-1 bg-warning">

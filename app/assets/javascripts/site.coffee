@@ -27,6 +27,11 @@
     data = $(data)
     list = $('#items_list')
     prepend(data, list)
+  
+  window.modal = (data) ->
+    data = $(data)
+    $('body').append(data)
+    data.modal('show')
 
   $(document).on 'click', '#items_list > li', (event) ->
     if $(event.target).is(".clickable:not('a')")
@@ -53,5 +58,15 @@
   $(document).on 'hidden.bs.collapse', '.collapse', (event) ->
     item = getItem(event)
     item.removeClass('selected')
+
+  $(document).on 'ajax:success', '.modal-response[data-remote=true]', (event) ->
+    [data, status, xhr] = event.detail
+    modal(xhr.responseText)
+
+  $(document).on 'ajax:error', '.modal.login form[data-remote=true]', (event) ->
+    [data, status, xhr] = event.detail
+    form = $(event.target)
+    alert_div = form.closest('.modal.login').find('.errors')
+    alert_div.text(xhr.responseText).removeClass('d-none')
 
 )(jQuery)

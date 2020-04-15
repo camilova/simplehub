@@ -19,11 +19,13 @@
         <%= l(published_at, format: :short) %>
       </small>
       <div class="btn-group btn-group-sm ml-2" role="group" aria-label="Edit Item">
-        <%= link_to edit_item_path(subitem),
-          remote: true, 
-          title: t('.edit'),
-          class: "btn btn-light" do %>
-          <%= fa_icon 'pencil' %>
+        <% if @admin %>
+          <%= link_to edit_item_path(subitem),
+            remote: true, 
+            title: t('.edit'),
+            class: "btn btn-light" do %>
+            <%= fa_icon 'pencil' %>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -32,7 +34,7 @@
     <% subitem.sources.each do |source| %>
       <%= render partial: 'sources/source', locals: { source: source, item: subitem } %>
     <% end %>
-    <% unless subitem.deprecated? %>
+    <% if ! subitem.deprecated? && @admin %>
       <li class="list-style-none">
         <small>
           <%= link_to t('.new'), new_source_path(item: subitem.id), remote: true, type: :post %>

@@ -38,7 +38,8 @@ es:
     header:
       title: COVID-19 HUB
       subtitle: GUÍA REFERENCIA DE PRÁCTICAS Y PROTOCOLOS
-      login: Iniciar Sesión
+      log_in: Iniciar Sesión
+      log_out: Cerrar Sesión
   sources:
     form:
       edit: Editar Recurso

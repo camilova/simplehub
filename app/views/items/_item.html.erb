@@ -12,16 +12,20 @@
       </a>
     </div>
     <div class="align-self-top ml-auto no-wrap">
-      <small class="ml-2 no-wrap"><%= link_to t('.new_subitem'), new_item_path(item: item.id), remote: true %></small>
-      <small class="mx-1">|</small>
-      <small class="mr-2 no-wrap"><%= link_to t('.new_source'), new_source_path(item: item.id), remote: true %></small>
+      <% if @admin %>
+        <small class="ml-2 no-wrap"><%= link_to t('.new_subitem'), new_item_path(item: item.id), remote: true %></small>
+        <small class="mx-1">|</small>
+        <small class="mr-2 no-wrap"><%= link_to t('.new_source'), new_source_path(item: item.id), remote: true %></small>
+      <% end %>
       <span class="badge badge-primary badge-pill"><%= item.items.actives.count %></span>
       <div class="btn-group btn-group-sm ml-2" role="group" aria-label="Controls of Theme">
-        <%= link_to edit_item_path(item),
-          remote: true, 
-          title: t('.edit'),
-          class: "btn btn-light" do %>
-          <%= fa_icon 'pencil' %>
+        <% if @admin %>
+          <%= link_to edit_item_path(item),
+            remote: true, 
+            title: t('.edit'),
+            class: "btn btn-light" do %>
+            <%= fa_icon 'pencil' %>
+          <% end %>
         <% end %>
       </div>
     </div>

@@ -2,9 +2,12 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_main_item, only: [:new]
   before_action :set_category, only: [:new, :index]
+  protect_from_forgery prepend: true
+  before_action :authenticate_user!, except: [:index]
 
   # GET /items
   def index
+    @admin = user_signed_in?
     @categories = Category.all
     @category ||= Category.default
     if @category == Category.default
