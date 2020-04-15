@@ -4,10 +4,10 @@ class ItemsController < ApplicationController
   before_action :set_category, only: [:new, :index]
   protect_from_forgery prepend: true
   before_action :authenticate_user!, except: [:index]
+  before_action :set_admin_status
 
   # GET /items
   def index
-    @admin = user_signed_in?
     @categories = Category.all
     @category ||= Category.default
     if @category == Category.default
@@ -77,5 +77,9 @@ class ItemsController < ApplicationController
 
     def item_params
       params.require(:item).permit(:title, :description, :deprecated, :item_id, category_ids: [])
+    end
+
+    def set_admin_status
+      @admin = user_signed_in?
     end
 end
