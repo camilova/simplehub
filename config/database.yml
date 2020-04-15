@@ -1,9 +1,9 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: covidhub_development
+  database: simplehub_development
   pool: 5
-  username: covidhub
+  username: simplehub
   password: 12345678
   host: localhost
   port: 5433
@@ -11,9 +11,9 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: covidhub_test
+  database: simplehub_test
   pool: 5
-  username: covidhub
+  username: simplehub
   password: 12345678
   host: localhost
   port: 5433
@@ -21,9 +21,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: covidhub
+  database: simplehub_production
   pool: 5
-  username: covidhub
-  password: 12345678
-  host: localhost
-  port: 5433
+  username: simplehub
+  password: <%= Figaro.env.db_password! %>
