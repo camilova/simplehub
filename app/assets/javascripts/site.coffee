@@ -52,6 +52,7 @@
     item = collapsable_element.closest("li[id*='item-']")
 
   $(document).on 'shown.bs.collapse', '.collapse', (event) ->
+    selected_items = $('li.selected').removeClass('selected')
     item = getItem(event)
     item.addClass('selected')
   
