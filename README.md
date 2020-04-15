@@ -1,2 +1,2 @@
 # simplehub
-Web app to organize, group and share references, documents and multimedia.
+Simple web app to organize, group and share references, documents and multimedia.
