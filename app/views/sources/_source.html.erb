@@ -34,7 +34,7 @@
               <%= fa_icon 'pencil' %>
             <% end %>
           <% end %>
-          <% if source.allow_download? %>
+          <% if source.allow_download? && source.resource.present? %>
             <%= link_to download_source_path(source), 
               title: t('.download_resource'),
               class: "btn btn-light" do %>

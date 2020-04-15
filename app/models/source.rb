@@ -31,7 +31,7 @@ class Source < ApplicationRecord
     require "zlib"
     data = self.resource_binary || 
       (Base64.decode64(self.resource64) if self.resource64.present?)
-    Zlib::Inflate.inflate(data)
+    Zlib::Inflate.inflate(data) if data.present?
   end
 
   private
