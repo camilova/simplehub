@@ -8,7 +8,7 @@
           <%= fa_icon 'play', class: 'mr-1' %>
         <% when source.image? %>
           <%= fa_icon 'image', class: 'mr-1' %>
-        <% else %>
+        <% when source.resource.present? %>
           <%= fa_icon 'file', class: 'mr-1' %>
         <% end %>
         <% css = (source.deprecated?? 'text-line-through text-secondary' : '') %>
