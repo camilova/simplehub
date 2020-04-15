@@ -37,6 +37,7 @@
           <% if source.allow_download? && source.resource.present? %>
             <%= link_to download_source_path(source), 
               title: t('.download_resource'),
+              target: :_blank,
               class: "btn btn-light" do %>
               <%= fa_icon 'download' %>
             <% end %>
