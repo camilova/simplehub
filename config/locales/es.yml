@@ -40,6 +40,11 @@ es:
       subtitle: GUÍA REFERENCIA DE PRÁCTICAS Y PROTOCOLOS
       log_in: Iniciar Sesión
       log_out: Cerrar Sesión
+      about: Developed by SaludActiva - Chile
+      about_title: SimpleHub
+      about_link: "http://google.com"
+    application:
+      title: SimpleHUB
   sources:
     form:
       edit: Editar Recurso
