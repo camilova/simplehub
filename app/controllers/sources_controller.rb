@@ -1,6 +1,7 @@
 class SourcesController < ApplicationController
   before_action :set_item, only: [:new]
   before_action :set_source, only: [:show, :download, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :download]
 
   # GET /sources/1
   def show

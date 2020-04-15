@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   AVAILABLE_LANGUAGES = [:en, :es]
-  before_action :set_locale
+  protect_from_forgery prepend: true
+  before_action :set_locale, :set_admin_status
 
   def render **options
     if options[:partial] && options[:callback]
@@ -59,5 +60,9 @@ class ApplicationController < ActionController::Base
         lg.in?(AVAILABLE_LANGUAGES) ? lg : nil
       end
     end
-    
+
+    def set_admin_status
+      @admin = user_signed_in?
+    end
+
 end
