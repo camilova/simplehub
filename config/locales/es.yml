@@ -42,7 +42,7 @@ es:
       log_out: Cerrar Sesión
       about: Developed by SaludActiva - Chile
       about_title: SimpleHub
-      about_link: "http://google.com"
+      about_link: "https://github.com/camilova/simplehub"
     application:
       title: SimpleHUB
   sources:
