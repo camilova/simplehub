@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_213207) do
+ActiveRecord::Schema.define(version: 2020_04_16_033018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2020_04_14_213207) do
     t.datetime "updated_at", null: false
     t.boolean "deleted", default: false
     t.text "resource64"
+    t.string "filename"
     t.index ["item_id"], name: "index_sources_on_item_id"
   end
 

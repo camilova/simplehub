@@ -70,7 +70,7 @@ class SourcesController < ApplicationController
     end
 
     def send_resource disposition = :inline
-      send_data @source.resource, disposition: disposition, 
+      send_data @source.resource, filename: @source.filename, disposition: disposition, 
         type: @source.mime_type, range: @source.streaming?
     end
 end

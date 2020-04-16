@@ -69,7 +69,6 @@ gem 'pg'
 
 gem "font-awesome-rails"
 gem 'simple_form'
-gem 'mime-types'
 gem 'paper_trail'
 
 gem 'devise'

@@ -38,19 +38,12 @@ class Source < ApplicationRecord
 
     def set_resource_data
       if uploaded_file.present?
-        require 'mime/types'
         require 'base64'
         require "zlib"
-        tempfile = uploaded_file.tempfile
-        mime_type_options = [MIME::Types.type_for(tempfile.path)].flatten
-        if mime_type_options.count > 1
-          mime_type = Mime::Type.lookup_by_extension(tempfile.path.split('.').last).to_s
-        else
-          mime_type = mime_type_options.first.to_s
-        end
-        self.resource_binary = Zlib::Deflate.deflate(tempfile.read)
+        self.resource_binary = Zlib::Deflate.deflate(uploaded_file.tempfile.read)
         self.resource64 = Base64.encode64(self.resource_binary)
-        self.mime_type = mime_type
+        self.mime_type = uploaded_file.content_type
+        self.filename = uploaded_file.original_filename
       end
     end
 end

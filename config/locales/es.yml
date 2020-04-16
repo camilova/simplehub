@@ -37,7 +37,6 @@ es:
   layouts:
     header:
       title: COVID-19 HUB
-      subtitle: GUÍA REFERENCIA DE PRÁCTICAS Y PROTOCOLOS
       log_in: Iniciar Sesión
       log_out: Cerrar Sesión
       about: Developed by SaludActiva - Chile
