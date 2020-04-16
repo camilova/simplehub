@@ -108,6 +108,8 @@ GEM
     loofah (2.5.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
+    magic (0.2.9)
+      ffi (>= 0.6.3)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
@@ -252,6 +254,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
+  magic
   mime-types
   paper_trail
   pg
