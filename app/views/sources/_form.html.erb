@@ -19,10 +19,12 @@
         <% end %>
       </div>
       <div class="modal-footer">
-        <%= link_to source_path(@source), class: 'btn btn-danger mr-auto', 
-          data: { confirm: t('.destroy_confirm') }, 
-          title: t('.destroy_title'), method: :delete, remote: true do %>
-          <%= fa_icon 'trash' %>
+        <% if @source.persisted? %>
+          <%= link_to source_path(@source), class: 'btn btn-danger mr-auto', 
+            data: { confirm: t('.destroy_confirm') }, 
+            title: t('.destroy_title'), method: :delete, remote: true do %>
+            <%= fa_icon 'trash' %>
+          <% end %>
         <% end %>
         <button form="source_form" data-disable-with="<%= t('loading') %>" type="submit" class="btn btn-success"><%= t('save') %></button>
         <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t('cancel') %></button>
