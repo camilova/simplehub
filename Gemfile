@@ -74,4 +74,3 @@ gem 'paper_trail'
 
 gem 'devise'
 gem 'figaro'
-gem 'magic'
