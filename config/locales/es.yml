@@ -32,6 +32,8 @@ es:
       edit: Editar Título
       new: Nuevo Título
       new_subitem: Nuevo Subtítulo
+      destroy_confirm: "¿Eliminar este item?"
+      destroy_title: "Eliminar"
     category:
       edit: Editar esta categoría
   layouts:
@@ -48,6 +50,8 @@ es:
     form:
       edit: Editar Recurso
       new: Agregar Recurso
+      destroy_confirm: "¿Eliminar este recurso?"
+      destroy_title: "Eliminar Recurso"
     source:
       history: Ver historial de cambios
       download_resource: Decargar la fuente

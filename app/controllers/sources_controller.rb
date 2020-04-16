@@ -52,7 +52,11 @@ class SourcesController < ApplicationController
 
   # DELETE /sources/1
   def destroy
-    @source.updates!(deleted: true)
+    if @source.update(deleted: true)
+      render json: "source-#{@source.id}".to_json, callback: 'destroy'
+    else
+      head :internal_server_error
+    end
   end
 
   private

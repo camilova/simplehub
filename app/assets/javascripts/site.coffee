@@ -33,6 +33,9 @@
     $('body').append(data)
     data.modal('show')
 
+  window.destroy = (data) ->
+    $(document).find("##{data}").addClass('d-none')
+
   $(document).on 'click', '#items_list > li', (event) ->
     if $(event.target).is(".clickable:not('a')")
       event.preventDefault()
@@ -43,7 +46,7 @@
     modal = $(event.target)
     modal.remove()
 
-  $(document).on 'ajax:success', '.modal form[data-remote=true]', (event) ->
+  $(document).on 'ajax:success', '.modal form[data-remote=true], .modal a[data-remote=true]', (event) ->
     modal = $(event.target).closest('.modal')
     modal.modal('hide')
   

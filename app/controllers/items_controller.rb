@@ -56,13 +56,17 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1
   def destroy
-    @item.update!(deleted: true)
+    if @item.update(deleted: true)
+      render json: "item-#{@item.id}".to_json, callback: 'destroy'
+    else
+      head :internal_server_error
+    end
   end
 
   private
     
     def set_item
-      @item = Item.find(params[:id])
+      @item = Item.unscoped.find(params[:id])
     end
 
     def set_main_item
