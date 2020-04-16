@@ -14,6 +14,13 @@
         <% end %>
       </div>
       <div class="modal-footer">
+        <% if @category.persisted? %>
+          <%= link_to category_path(@category), class: 'btn btn-danger mr-auto', 
+            data: { confirm: t('.destroy_confirm', category: @category.name) }, 
+            title: t('.destroy_title'), method: :delete, remote: true do %>
+            <%= fa_icon 'trash' %>
+          <% end %>
+        <% end %>
         <button form="category_form" type="submit" class="btn btn-success"><%= t('save') %></button>
         <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t('cancel') %></button>
       </div>

@@ -34,7 +34,11 @@
     data.modal('show')
 
   window.destroy = (data) ->
-    $(document).find("##{data}").addClass('d-none')
+    if $.isArray(data) is true
+      data.forEach (item) ->
+        $(document).find("##{item}").addClass('d-none')
+    else
+      $(document).find("##{data}").addClass('d-none')
 
   $(document).on 'click', '#items_list > li', (event) ->
     if $(event.target).is(".clickable:not('a')")

@@ -34,7 +34,12 @@ class CategoriesController < ApplicationController
 
   # DELETE /categories/1
   def destroy
-    @category.update!(deleted: true)
+    if @category.update(deleted: true)
+      elements = ["category-#{@category.id}", "edit-category-#{@category.id}"]
+      render json: elements.to_json, callback: 'destroy'
+    else
+      head :internal_server_error
+    end
   end
 
   private

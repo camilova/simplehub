@@ -61,6 +61,8 @@ es:
     form:
       edit: Editar Categoría
       new: Nueva Categoría
+      destroy_confirm: "¿Eliminar la categoría %{category}?"
+      destroy_title: "Eliminar Categoría"
   cancel: Cancelar
   save: Guardar
   loading: Cargando...

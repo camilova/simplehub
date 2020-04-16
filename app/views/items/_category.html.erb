@@ -1,12 +1,14 @@
 <% classes = "list-group-item list-group-item-action #{ 'active' if active }" %>
 <% border_style = if @admin then 'border-right: none' else '' end %>
 <%= link_to items_path(category: category.name),
+  id: "category-#{category.id}",
   style: border_style,
   class: classes do %>
   <%= category.name %>
 <% end %>
 <% if @admin %>
-  <%= link_to edit_category_path(category), 
+  <%= link_to edit_category_path(category),
+    id: "edit-category-#{category.id}",
     title: t('.edit'),
     remote: true,
     style: 'border-left: none',
