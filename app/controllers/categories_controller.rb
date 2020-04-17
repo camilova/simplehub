@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:list]
 
   # GET /categories/new
   def new
@@ -40,6 +40,11 @@ class CategoriesController < ApplicationController
     else
       head :internal_server_error
     end
+  end
+
+  # GET /categories/list
+  def list
+    render partial: 'list', callback: 'modal'
   end
 
   private
