@@ -1,4 +1,4 @@
-<% classes = "list-group-item list-group-item-action #{ 'active' if active }" %>
+<% classes = "list-group-item list-group-item-action no-wrap #{ 'active' if active }" %>
 <% border_style = if @admin then 'border-right: none' else '' end %>
 <%= link_to items_path(category: category.name),
   id: "category-#{category.id}",
