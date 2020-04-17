@@ -40,7 +40,7 @@
     else
       $(document).find("##{data}").addClass('d-none')
 
-  $(document).on 'click', '#items_list > li', (event) ->
+  $(document).on 'click', '#items_list li', (event) ->
     if $(event.target).is(".clickable:not('a')")
       event.preventDefault()
       a = $(this).find('a[id*=item_details_header_]')
