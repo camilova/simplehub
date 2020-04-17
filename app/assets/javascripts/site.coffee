@@ -69,7 +69,11 @@
 
   $(document).on 'ajax:success', '.modal-response[data-remote=true]', (event) ->
     [data, status, xhr] = event.detail
-    modal(xhr.responseText)
+    try
+      data = $(xhr.responseText)
+      modal(xhr.responseText)
+    catch
+      return true
 
   $(document).on 'ajax:error', '.modal.login form[data-remote=true]', (event) ->
     [data, status, xhr] = event.detail

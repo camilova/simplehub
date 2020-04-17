@@ -2,7 +2,7 @@
   data-parent="<%= "item-#{item.id}" %>">
   <div class="container-fluid p-0">
     <div class="row">
-      <div class="col">
+      <div class="col text-small-xs">
         <% case true %>
         <% when source.streaming? %>
           <%= fa_icon 'play', class: 'mr-1' %>
@@ -38,7 +38,7 @@
             <%= link_to download_source_path(source), 
               title: t('.download_resource'),
               target: :_blank,
-              class: "btn btn-light" do %>
+              class: "btn btn-light d-none d-md-inline-block" do %>
               <%= fa_icon 'download' %>
             <% end %>
           <% end %>

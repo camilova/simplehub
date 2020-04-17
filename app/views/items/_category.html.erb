@@ -6,7 +6,7 @@
   class: classes do %>
   <%= category.name %>
 <% end %>
-<% if @admin %>
+<% if @admin && category != Category.default %>
   <%= link_to edit_category_path(category),
     id: "edit-category-#{category.id}",
     title: t('.edit'),

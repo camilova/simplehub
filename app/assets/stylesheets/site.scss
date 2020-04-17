@@ -33,3 +33,19 @@ input[type='checkbox'].is-valid ~ label{
 .v-align-middle {
   vertical-align: middle;
 }
+
+@media (max-width: 768px) {
+  .line-height-xs-0 {
+    line-height: 0rem;
+  }
+
+  .text-small-xs {
+    font-size: 80%;
+  }
+}
+
+@media (min-width: 992px) {
+  .line-height-md-normal {
+    line-height: 1.5;
+  }
+}

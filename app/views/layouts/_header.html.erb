@@ -1,8 +1,9 @@
 <div class="row pt-1 bg-warning">
-  <div class="col-12 text-center">
-    <h3><%= t('.title') %></h3>
+  <div class="col-12 col-xl-4 offset-xl-4 text-center">
+    <h3 class="d-none d-md-inline"><%= t('.title') %></h3>
+    <h5 class="d-inline d-md-none"><%= t('.title') %></h5>
   </div>
-  <div class="col-auto text-right no-wrap" style="width:30%;margin-left:-30%;">
+  <div class="col-12 col-xl-auto ml-xl-auto text-center no-wrap align-self-center">
     <% if user_signed_in? %>
       <%= current_user.email %>
       <%= link_to t('.log_out'),
