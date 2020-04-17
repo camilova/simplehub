@@ -45,7 +45,7 @@ es:
       about_title: SimpleHub
       about_link: "https://github.com/camilova/simplehub"
     application:
-      title: SimpleHUB
+      title: CovidHub
   sources:
     form:
       edit: Editar Recurso
