@@ -17,7 +17,12 @@ class CreateAttachmentFiles < ActiveRecord::Migration[5.2]
         attachment.filename = source.filename
         attachment.save!
         source.attachment_file = attachment
+        # Clean up before save
+        source.resource_binary = nil
+        PaperTrail.request.disable_model(Source)
+        source.versions.destroy_all
         source.save!
+        PaperTrail.request.enable_model(Source)
       end
       # Remove unused columns of sources
       remove_column :sources, :resource_binary
