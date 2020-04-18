@@ -42,11 +42,16 @@ class SourcesController < ApplicationController
 
   # PATCH/PUT /sources/1
   def update
-    if @source.update(source_params)
-      render partial: 'sources/source', callback: 'replace',
-        locals: { source: @source, item: @source.item }
-    else
-      head :internal_server_error
+    begin
+      if @source.update(source_params)
+        render partial: 'sources/source', callback: 'replace',
+          locals: { source: @source, item: @source.item }
+      else
+        head :internal_server_error
+      end
+    rescue StandardError
+      render json: t('.attachment_to_big').to_json, callback: 'alert', 
+        status: :unprocessable_entity
     end
   end
 
@@ -74,7 +79,8 @@ class SourcesController < ApplicationController
     end
 
     def send_resource disposition = :inline
-      send_data @source.resource, filename: @source.filename, disposition: disposition, 
-        type: @source.mime_type, range: @source.streaming?
+      attachment = @source.attachment_file
+      send_data attachment.resource, filename: attachment.filename, disposition: disposition, 
+        type: attachment.mime_type, range: @source.streaming?
     end
 end

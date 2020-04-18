@@ -57,6 +57,8 @@ es:
       download_resource: Decargar la fuente
       history_source: Ver el historial de versiones
       edit: Editar esta fuente
+    update:
+      attachment_to_big: "El archivo es demasiado grande, el tamaño máximo permitido es de 400 MB"
   categories:
     form:
       edit: Editar Categoría

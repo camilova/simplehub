@@ -1,10 +1,11 @@
 class Source < ApplicationRecord
   belongs_to :item
+  belongs_to :attachment_file
   default_scope { where(deleted: false).order(:deprecated, created_at: :desc) }
   before_save :set_resource_data
   attr_accessor :uploaded_file
   has_paper_trail versions: { class_name: 'SourceVersion' }, 
-    skip: [:resource_binary, :deprecated, :approved, :item_id, :allow_download, :deleted]
+    skip: [:deprecated, :approved, :item_id, :allow_download, :deleted]
 
   def video?
     mime_type.present? && mime_type.include?('video')
@@ -26,24 +27,24 @@ class Source < ApplicationRecord
     video? || audio?
   end
 
-  def resource
-    require 'base64'
-    require "zlib"
-    data = self.resource_binary || 
-      (Base64.decode64(self.resource64) if self.resource64.present?)
-    Zlib::Inflate.inflate(data) if data.present?
-  end
-
   private
 
     def set_resource_data
       if uploaded_file.present?
-        require 'base64'
-        require "zlib"
-        self.resource_binary = Zlib::Deflate.deflate(uploaded_file.tempfile.read)
-        self.resource64 = Base64.encode64(self.resource_binary)
-        self.mime_type = uploaded_file.content_type
-        self.filename = uploaded_file.original_filename
+        if uploaded_file.size <= (400 * 1024 * 1024) # Max file size = 400 MB
+          ActiveRecord::Base.transaction do
+            require "zlib"
+            attachment = AttachmentFile.new
+            attachment.resource_binary_zip = Zlib::Deflate.deflate(uploaded_file.tempfile.read)
+            attachment.mime_type = uploaded_file.content_type
+            self.mime_type = attachment.mime_type
+            attachment.filename = uploaded_file.original_filename
+            attachment.save!
+            self.attachment_file = attachment
+          end
+        else
+          raise 'Attachment is too big'
+        end
       end
     end
 end

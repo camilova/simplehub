@@ -8,7 +8,7 @@
           <%= fa_icon 'play', class: 'mr-1' %>
         <% when source.image? %>
           <%= fa_icon 'image', class: 'mr-1' %>
-        <% when source.resource.present? %>
+        <% when source.attachment_file.present? %>
           <%= fa_icon 'file', class: 'mr-1' %>
         <% end %>
         <% css = (source.deprecated?? 'text-line-through text-secondary' : '') %>
@@ -16,7 +16,7 @@
           <%= link_to (source.title.presence || source.link), source.link,
             target: '_blank', class: css
           %>
-        <% elsif source.resource.present? %>
+        <% elsif source.attachment_file.present? %>
           <%= link_to source.title, source_path(source), 
             class: css, 
             target: '_blank' %>
@@ -34,7 +34,7 @@
               <%= fa_icon 'pencil' %>
             <% end %>
           <% end %>
-          <% if source.allow_download? && source.resource.present? %>
+          <% if source.allow_download? && source.attachment_file.present? %>
             <%= link_to download_source_path(source), 
               title: t('.download_resource'),
               target: :_blank,

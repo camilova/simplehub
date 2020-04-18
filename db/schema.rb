@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_134920) do
+ActiveRecord::Schema.define(version: 2020_04_17_174655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachment_files", force: :cascade do |t|
+    t.binary "resource_binary_zip"
+    t.string "mime_type"
+    t.string "filename"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -59,7 +67,6 @@ ActiveRecord::Schema.define(version: 2020_04_16_134920) do
   create_table "sources", force: :cascade do |t|
     t.string "title"
     t.string "link"
-    t.binary "resource_binary"
     t.string "mime_type"
     t.boolean "deprecated", default: false
     t.boolean "approved", default: true
@@ -68,8 +75,8 @@ ActiveRecord::Schema.define(version: 2020_04_16_134920) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "deleted", default: false
-    t.text "resource64"
-    t.string "filename"
+    t.bigint "attachment_file_id"
+    t.index ["attachment_file_id"], name: "index_sources_on_attachment_file_id"
     t.index ["item_id"], name: "index_sources_on_item_id"
   end
 
@@ -91,5 +98,6 @@ ActiveRecord::Schema.define(version: 2020_04_16_134920) do
   add_foreign_key "item_categories", "categories"
   add_foreign_key "item_categories", "items"
   add_foreign_key "items", "items"
+  add_foreign_key "sources", "attachment_files"
   add_foreign_key "sources", "items"
 end
