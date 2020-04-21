@@ -44,7 +44,7 @@
           <%= render partial: 'sources/source', locals: { source: source, item: item } %>
         <% end %>
       </ul>
-      <% if item.items.any? %>
+      <% if item.items.any? && item.sources.any? %>
         <div class="w-100 border-bottom my-2"></div>
       <% end %>
       <ul class="list-group list-group-flush subitems-list">
