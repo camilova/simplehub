@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col d-flex flex-column" style="max-height: 100vh">
       <%= render partial: 'layouts/header' %>
-      <div class="row my-1 my-md-2">
-        <div class="col-auto m-auto d-none d-xl-block">
+      <div class="row">
+        <div class="col-auto mx-auto my-2 d-none d-xl-block">
           <div class="list-group list-group-horizontal">
             <% @categories.each do |category| %>
               <% active = category == @category %>
@@ -17,27 +17,37 @@
             <% end %>
           </div>
         </div>
-        <div class="col-auto m-auto d-xl-none">
-          <div class="list-group list-group-horizontal">
-            <% classes = "list-group-item list-group-item-action no-wrap py-1 align-self-center"%>
-            <%= link_to @category.name, list_categories_path,
-              id: "category-#{@category.id}",
-              class: "#{classes} active",
-              remote: true
-            %>
-            <% if @admin && @category != Category.default %>
-              <%= link_to edit_category_path(@category),
-                id: "edit-category-#{@category.id}",
-                remote: true,
-                style: 'border-left: none',
-                class: "#{classes} px-2" do %>
-                <%= fa_icon 'pencil' %>
+        <div class="col d-xl-none px-0 text-center">
+          <ul class="list-group">
+            <li class="list-group-item no-wrap p-1 d-flex justify-content-between rounded-0">
+              <button type="button" class="btn btn-sm" data-toggle="collapse" href="#collapse_category">
+                <%= fa_icon 'chevron-down', class: 'category-toggle' %>
+              </button>
+              <span class="d-inline-block v-align-middle"><%= @category.name %></span>
+              <% if @admin && @category != Category.default %>
+                <%= link_to edit_category_path(@category),
+                  id: "edit-category-#{@category.id}",
+                  remote: true,
+                  style: 'border-left: none',
+                  class: "#{classes} px-2" do %>
+                  <%= fa_icon 'pencil' %>
+                <% end %>
               <% end %>
-            <% end %>
+              <button type="button" class="btn btn-sm" data-toggle="collapse" href="#collapse_category">
+                <%= fa_icon 'chevron-down', class: 'category-toggle' %>
+              </button>
+            </li>
+          </ul>
+          <div class="collapse" id="collapse_category">
+            <div class="list-group">
+              <% Category.where.not(id: @category.id).each do |category| %>
+                <a href="<%= items_path(category: category.name) %>" class="list-group-item no-wrap"><%= category.name %></a>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-      <div class="row flex-grow-1 justify-content-center overflow-auto">
+      <div class="row flex-grow-1 justify-content-center overflow-auto" id="items_container">
         <div class="col-xs-12 col-md-10 col-xl-8">
           <% if @admin %>
             <div class="row my-1 my-md-2">
@@ -48,7 +58,7 @@
             </div>
           <% end %>
           <div class="row">
-            <div class="col">
+            <div class="col px-0">
               <ul class="list-group" id="items_list">
                 <% @items.each do |item| %>
                   <%= render partial: 'item', locals: { item: item } %>

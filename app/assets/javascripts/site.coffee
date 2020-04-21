@@ -81,4 +81,12 @@
     alert_div = form.closest('.modal.login').find('.errors')
     alert_div.text(xhr.responseText).removeClass('d-none')
 
+  $(document).on 'show.bs.collapse', '#collapse_category', (event) ->
+    $('#items_container').fadeOut()
+    $('.category-toggle').removeClass('fa-chevron-down').addClass('fa-chevron-up')
+
+  $(document).on 'hide.bs.collapse', '#collapse_category', (event) ->
+    $('#items_container').fadeIn()
+    $('.category-toggle').removeClass('fa-chevron-up').addClass('fa-chevron-down')
+
 )(jQuery)
