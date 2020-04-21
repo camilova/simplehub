@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col d-flex flex-column" style="max-height: 100vh">
+    <div class="col d-flex flex-column" style="height: 100vh">
       <%= render partial: 'layouts/header' %>
       <div class="row">
         <div class="col-auto mx-auto my-2 d-none d-xl-block">
@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div class="row flex-grow-1 justify-content-center overflow-auto" id="items_container">
+      <div class="row flex-grow-1 justify-content-center overflow-auto pb-3" id="items_container">
         <div class="col-xs-12 col-md-10 col-xl-8">
           <% if @admin %>
             <div class="row my-1 my-md-2">
@@ -67,6 +67,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="row bg-light text-center justify-content-center py-1">
+        <small><%= t('.about') %><%= link_to t('.about_title'), t('.about_link'), target: :_blank, class: 'ml-3' %></small>
       </div>
     </div>
   </div>

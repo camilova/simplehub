@@ -21,6 +21,9 @@ es:
     index:
       new_category: Agregar nueva categoría
       new_item: Agregar Tema Principal
+      about: Developed by SaludActiva - Chile
+      about_title: SimpleHub
+      about_link: "https://github.com/camilova/simplehub"
     item:
       edit: Editar este titulo
       new_subitem: Agregar Subtema
@@ -41,9 +44,6 @@ es:
       title: COVID-19 HUB
       log_in: Iniciar Sesión
       log_out: Cerrar Sesión
-      about: Developed by SaludActiva - Chile
-      about_title: SimpleHub
-      about_link: "https://github.com/camilova/simplehub"
     application:
       title: CovidHub
   sources:
