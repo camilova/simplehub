@@ -18,7 +18,7 @@
         <small class="mx-1">|</small>
         <small class="mr-2 no-wrap"><%= link_to t('.new_source'), new_source_path(item: item.id), remote: true %></small>
       <% end %>
-      <span class="badge badge-primary badge-pill d-none d-md-inline-block"><%= item.items.actives.count %></span>
+      <span class="badge badge-primary badge-pill d-none d-md-inline-block"><%= item.active_sources_count %></span>
       <div class="btn-group btn-group-sm ml-2" role="group" aria-label="Controls of Theme">
         <% if @admin %>
           <%= link_to edit_item_path(item),

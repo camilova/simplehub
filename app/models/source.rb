@@ -6,6 +6,7 @@ class Source < ApplicationRecord
   attr_accessor :uploaded_file
   has_paper_trail versions: { class_name: 'SourceVersion' }, 
     skip: [:deprecated, :approved, :item_id, :allow_download, :deleted]
+  scope :actives, -> { where(deprecated: false) }
 
   def video?
     mime_type.present? && mime_type.include?('video')

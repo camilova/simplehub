@@ -11,6 +11,10 @@ class Item < ApplicationRecord
   scope :main, -> { where(item: nil) }
   after_save :set_deprecated_on_sources
 
+  def active_sources_count
+    sources.actives.count + (items.sum do |i| i.sources.actives.count end)
+  end
+
   def main?
     items.any? || item.nil?
   end
