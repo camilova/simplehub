@@ -2,7 +2,7 @@
   data-parent="<%= "item-#{subitem.item.id}" %>"
   class="list-group-item px-0 <%= 'text-secondary bg-light' if subitem.deprecated? %>">
   <div class="d-flex w-100">
-    <div class="mb-1 mr-1 <%= 'text-line-through' if subitem.deprecated? %>">
+    <div class="mb-1 mx-1 <%= 'text-line-through' if subitem.deprecated? %>">
       <h6><%= subitem.title %></h6>
       <% if subitem.description.present? %>
         <p class="mb-1 font-size-90"><%= subitem.description %></p>
@@ -15,7 +15,7 @@
         </small>
       <% end %>
       <% published_at = subitem.published_at.presence || Date.today %>
-      <small class="px-1 no-wrap d-inline-block" title="<%= l(published_at, format: :long) %>">
+      <small class="px-1 no-wrap d-none d-md-inline-block" title="<%= l(published_at, format: :long) %>">
         <%= l(published_at, format: :short) %>
       </small>
       <div class="btn-group btn-group-sm ml-2" role="group" aria-label="Edit Item">
