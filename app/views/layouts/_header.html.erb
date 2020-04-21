@@ -3,7 +3,7 @@
     <h3 class="d-none d-md-inline"><%= t('.title') %></h3>
     <h5 class="d-inline d-md-none"><%= t('.title') %></h5>
   </div>
-  <div class="col-12 col-xl-auto ml-xl-auto text-center no-wrap align-self-center">
+  <div class="d-none d-md-block col-xl-auto ml-xl-auto text-center no-wrap align-self-center">
     <% if user_signed_in? %>
       <%= current_user.email %>
       <%= link_to t('.log_out'),

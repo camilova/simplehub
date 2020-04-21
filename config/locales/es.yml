@@ -24,6 +24,8 @@ es:
       about: Developed by SaludActiva - Chile
       about_title: SimpleHub
       about_link: "https://github.com/camilova/simplehub"
+      log_in: Login
+      log_out: Cerrar
     item:
       edit: Editar este titulo
       new_subitem: Agregar Subtema

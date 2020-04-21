@@ -69,7 +69,23 @@
         </div>
       </div>
       <div class="row bg-light text-center justify-content-center py-1">
-        <small><%= t('.about') %><%= link_to t('.about_title'), t('.about_link'), target: :_blank, class: 'ml-3' %></small>
+        <small>
+          <%= t('.about') %>
+          <%= link_to t('.about_title'), t('.about_link'), target: :_blank, class: 'ml-3' %>
+          <% if user_signed_in? %>
+            <%= link_to destroy_user_session_path,
+              method: :delete,
+              class: 'ml-3' do %>
+                <%= fa_icon 'times-circle', class: 'text-danger mr-1' %><%= t('.log_out') %>
+              <% end %>
+          <% else %>
+            <%= link_to new_user_session_path, 
+              remote: true,
+              class: 'modal-response ml-3' do %>
+                <%= fa_icon 'user', class: 'mr-1' %><%= t('.log_in') %>
+              <% end %>
+          <% end %>
+        </small>
       </div>
     </div>
   </div>
