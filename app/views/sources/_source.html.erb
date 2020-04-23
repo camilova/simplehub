@@ -7,6 +7,8 @@
     <%= fa_icon 'play', class: icon_class %>
   <% when source.image? %>
     <%= fa_icon 'image', class: icon_class %>
+  <% when source.hyperlink? %>
+    <%= fa_icon 'globe', class: icon_class %>
   <% when source.attachment_file.present? %>
     <%= fa_icon 'file', class: icon_class %>
   <% end %>

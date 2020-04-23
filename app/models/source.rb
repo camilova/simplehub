@@ -28,6 +28,10 @@ class Source < ApplicationRecord
     video? || audio?
   end
 
+  def hyperlink?
+    attachment_file.nil? && link.present?
+  end
+
   private
 
     def set_resource_data
