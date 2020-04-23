@@ -1,54 +1,48 @@
 <li id="source-<%= source.id %>"
+  class="list-group-item d-flex align-items-center py-2 px-2"
   data-parent="<%= "item-#{item.id}" %>">
-  <div class="container-fluid p-0">
-    <div class="row">
-      <div class="col text-small-xs">
-        <% case true %>
-        <% when source.streaming? %>
-          <%= fa_icon 'play', class: 'mr-1' %>
-        <% when source.image? %>
-          <%= fa_icon 'image', class: 'mr-1' %>
-        <% when source.attachment_file.present? %>
-          <%= fa_icon 'file', class: 'mr-1' %>
-        <% end %>
-        <% css = (source.deprecated?? 'text-line-through text-secondary' : '') %>
-        <% if source.link.present? %>
-          <%= link_to (source.title.presence || source.link), source.link,
-            target: '_blank', class: css
-          %>
-        <% elsif source.attachment_file.present? %>
-          <%= link_to source.title, source_path(source), 
-            class: css, 
-            target: '_blank' %>
-        <% else %>
-          <span class="<%= css %>"><%= source.title %></span>
-        <% end %>
-      </div>
-      <div class="col-auto">
-        <div class="btn-group btn-group-sm" role="group" aria-label="View Source">
-          <% if @admin %>
-            <%= link_to edit_source_path(source, item: source.item.id),
-              remote: true, 
-              title: t('.edit'),
-              class: "btn btn-light" do %>
-              <%= fa_icon 'pencil' %>
-            <% end %>
-          <% end %>
-          <% if source.allow_download? && source.attachment_file.present? %>
-            <%= link_to download_source_path(source), 
-              title: t('.download_resource'),
-              target: :_blank,
-              class: "btn btn-light d-none d-md-inline-block" do %>
-              <%= fa_icon 'download' %>
-            <% end %>
-          <% end %>
-          <%= link_to history_source_path(source), 
-            title: t('.history'),
-            class: "btn btn-light d-none" do %>
-            <%= fa_icon 'history' %>
-          <% end %>
-        </div>
-      </div>
-    </div>
+  <% icon_class = "mr-2" %>
+  <% case true %>
+  <% when source.streaming? %>
+    <%= fa_icon 'play', class: icon_class %>
+  <% when source.image? %>
+    <%= fa_icon 'image', class: icon_class %>
+  <% when source.attachment_file.present? %>
+    <%= fa_icon 'file', class: icon_class %>
+  <% end %>
+  <% css = (source.deprecated?? 'text-line-through text-secondary' : '') %>
+  <% if source.link.present? %>
+    <%= link_to (source.title.presence || source.link), source.link,
+      target: '_blank', class: css
+    %>
+  <% elsif source.attachment_file.present? %>
+    <%= link_to source.title, source_path(source), 
+      class: css, 
+      target: '_blank' %>
+  <% else %>
+    <span class="<%= css %>"><%= source.title %></span>
+  <% end %>
+  <div class="btn-group btn-group-sm ml-auto" role="group" aria-label="View Source">
+    <% if @admin %>
+      <%= link_to edit_source_path(source, item: source.item.id),
+        remote: true, 
+        title: t('.edit'),
+        class: "btn btn-light" do %>
+        <%= fa_icon 'pencil' %>
+      <% end %>
+    <% end %>
+    <% if source.allow_download? && source.attachment_file.present? %>
+      <%= link_to download_source_path(source), 
+        title: t('.download_resource'),
+        target: :_blank,
+        class: "btn btn-light d-none d-md-inline-block" do %>
+        <%= fa_icon 'download' %>
+      <% end %>
+    <% end %>
+    <%= link_to history_source_path(source), 
+      title: t('.history'),
+      class: "btn btn-light d-none" do %>
+      <%= fa_icon 'history' %>
+    <% end %>
   </div>
 </li>

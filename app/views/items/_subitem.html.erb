@@ -30,7 +30,7 @@
       </div>
     </div>
   </div>
-  <ul class="mt-2 sources-list">
+  <ul class="mt-2 sources-list list-group list-group-flush ml-1 ml-md-2">
     <% subitem.sources.each do |source| %>
       <%= render partial: 'sources/source', locals: { source: source, item: subitem } %>
     <% end %>

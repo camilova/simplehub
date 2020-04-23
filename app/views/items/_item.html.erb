@@ -39,14 +39,11 @@
   </div>
   <div class="collapse pt-1" id="<%= detail_div_id %>">
     <div class="card card-body p-1 p-md-2 p-xl-4">
-      <ul class="sources-list pl-4">
+      <ul class="sources-list list-group list-group-flush">
         <% item.sources.each do |source| %>
           <%= render partial: 'sources/source', locals: { source: source, item: item } %>
         <% end %>
       </ul>
-      <% if item.items.any? && item.sources.any? %>
-        <div class="w-100 border-bottom my-2"></div>
-      <% end %>
       <ul class="list-group list-group-flush subitems-list">
         <% item.items.each do |subitem| %>
           <%= render partial: 'subitem', locals: { subitem: subitem } %>
