@@ -71,7 +71,7 @@
       <div class="row bg-light text-center justify-content-center py-1 fixed-bottom">
         <small>
           <%= t('.about') %>
-          <%= link_to t('.about_title'), t('.about_link'), target: :_blank, class: 'ml-3' %>
+          <%= link_to t('.about_title'), t('.about_link'), target: :_blank, class: 'ml-3 d-none' %>
           <% if user_signed_in? %>
             <%= link_to destroy_user_session_path,
               method: :delete,
