@@ -26,10 +26,6 @@ input[type='checkbox'].is-valid ~ label{
   list-style: none;
 }
 
-.selected {
-  background-color: #f8f9fa;
-}
-
 .v-align-middle {
   vertical-align: middle;
 }
@@ -52,4 +48,16 @@ input[type='checkbox'].is-valid ~ label{
 
 .overflow-y-auto {
   overflow-y: auto;
+}
+
+.item.list-group-item-action:hover {
+  background-color: $gray-200;
+}
+
+.item.list-group-item-action {
+  background-color: $gray-100;
+}
+
+.bg-inherit {
+  background-color: inherit;
 }

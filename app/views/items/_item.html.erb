@@ -1,8 +1,8 @@
 <% detail_div_id = "item_detail#{item.id}" %>
 <li id="item-<%= item.id %>"
-  class="list-group-item list-group-item-action px-3 px-md-4 pb-4 clickable">
-  <div class="row d-flex w-100 m-0">
-    <div class="col-12 col-md p-0 clickable">
+  class="list-group-item list-group-item-action px-2 px-md-4 pb-2 pt-1 pb-md-4 clickable item">
+  <div class="row d-flex w-100 m-0 sticky-top bg-inherit py-1">
+    <div class="col-12 col-md p-0 clickable order-1 order-md-0">
       <a
         id="item_details_header_<%= item.id %>"
         href="#<%= detail_div_id %>"
@@ -12,7 +12,7 @@
         <h6 class="mb-1 d-md-none"><%= item.title %></h6>
       </a>
     </div>
-    <div class="col-auto order-first order-md-2 py-0 pl-2 pr-0 ml-md-auto align-self-top no-wrap line-height-xs-0 line-height-md-normal">
+    <div class="col-auto py-0 pl-2 pr-0 ml-md-auto align-self-top no-wrap line-height-xs-0 line-height-md-normal">
       <% if @admin %>
         <small class="ml-2 no-wrap"><%= link_to t('.new_subitem'), new_item_path(item: item.id), remote: true %></small>
         <small class="mx-1">|</small>
@@ -30,14 +30,12 @@
         <% end %>
       </div>
     </div>
-  </div>
-  <div class="row d-flex w-100 m-0">
-    <div class="col px-0 py-1">
+    <div class="col-12 px-0 py-1 order-2">
       <p class="mb-1 clickable d-none d-md-inline"><%= item.description %></p>
       <p class="mb-1 clickable small d-md-none"><%= item.description %></p>
     </div>
   </div>
-  <div class="collapse pt-1" id="<%= detail_div_id %>">
+  <div class="collapse" id="<%= detail_div_id %>">
     <div class="card card-body p-1 p-md-2 p-xl-4">
       <ul class="sources-list list-group list-group-flush">
         <% item.sources.each do |source| %>

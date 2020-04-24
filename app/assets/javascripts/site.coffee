@@ -58,15 +58,6 @@
     collapsable_element = $(event.target)
     item = collapsable_element.closest("li[id*='item-']")
 
-  $(document).on 'shown.bs.collapse', '.collapse', (event) ->
-    selected_items = $('li.selected').removeClass('selected')
-    item = getItem(event)
-    item.addClass('selected')
-  
-  $(document).on 'hidden.bs.collapse', '.collapse', (event) ->
-    item = getItem(event)
-    item.removeClass('selected')
-
   $(document).on 'ajax:success', '.modal-response[data-remote=true]', (event) ->
     [data, status, xhr] = event.detail
     try
