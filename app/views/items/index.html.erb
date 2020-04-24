@@ -23,7 +23,7 @@
               <button type="button" class="btn btn-sm text-secondary" data-toggle="collapse" href="#collapse_category">
                 <%= fa_icon 'chevron-down', class: 'category-toggle' %>
               </button>
-              <span class="d-inline-block v-align-middle"><%= @category.name %></span>
+              <span class="d-inline-block v-align-middle" data-toggle="collapse" href="#collapse_category"><%= @category.name %></span>
               <% if @admin && @category != Category.default %>
                 <%= link_to edit_category_path(@category),
                   id: "edit-category-#{@category.id}",
