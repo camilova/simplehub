@@ -21,7 +21,7 @@ es:
     index:
       new_category: Agregar nueva categoría
       new_item: Agregar Tema Principal
-      about: Developed by SaludActiva - Chile
+      about: Developed by Waipa - Chile
       about_title: SimpleHub
       about_link: "https://github.com/camilova/simplehub"
       log_in: Login
