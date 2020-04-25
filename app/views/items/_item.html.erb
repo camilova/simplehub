@@ -27,6 +27,18 @@
             class: "btn btn-light" do %>
             <%= fa_icon 'pencil' %>
           <% end %>
+          <%= link_to move_item_path(item, direction: 'up'),
+            remote: true,
+            method: :post,
+            class: "btn btn-light" do %>
+            <%= fa_icon 'arrow-up' %>
+          <% end %>
+          <%= link_to move_item_path(item, direction: 'down'),
+            remote: true, 
+            method: :post,
+            class: "btn btn-light" do %>
+            <%= fa_icon 'arrow-down' %>
+          <% end %>
         <% end %>
       </div>
     </div>

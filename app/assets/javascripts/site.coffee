@@ -40,6 +40,24 @@
     else
       $(document).find("##{data}").addClass('d-none')
 
+  window.move = (data) ->
+    element = $("##{data.id}")
+    element.find('.collapse').collapse('hide')
+    direction = data.direction
+    switch direction
+      when 'up'
+        prev = element.prev("#{element.prop('tagName')}:not(.new)")
+        if prev.length > 0
+          element.fadeOut 250, ->
+            element.insertBefore(prev)
+            element.fadeIn()
+      when 'down'
+        next = element.next("#{element.prop('tagName')}:not(.new)")
+        if next.length > 0
+          element.fadeOut 250, ->
+            element.insertAfter(next)
+            element.fadeIn()
+
   $(document).on 'click', '#items_list li', (event) ->
     if $(event.target).is(".clickable:not('a')")
       event.preventDefault()

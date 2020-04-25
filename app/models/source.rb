@@ -1,12 +1,13 @@
 class Source < ApplicationRecord
   belongs_to :item
   belongs_to :attachment_file
-  default_scope { where(deleted: false).order(:deprecated, created_at: :desc) }
+  default_scope { where(deleted: false).order(:position) }
   before_save :set_resource_data
   attr_accessor :uploaded_file
   has_paper_trail versions: { class_name: 'SourceVersion' }, 
-    skip: [:deprecated, :approved, :item_id, :allow_download, :deleted]
+    skip: [:deprecated, :approved, :item_id, :allow_download, :deleted, :position]
   scope :actives, -> { where(deprecated: false) }
+  acts_as_list scope: :item
 
   def video?
     mime_type.present? && mime_type.include?('video')

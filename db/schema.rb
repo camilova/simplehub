@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_17_174655) do
+ActiveRecord::Schema.define(version: 2020_04_25_003232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_04_17_174655) do
     t.boolean "deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position"
     t.index ["item_id"], name: "index_items_on_item_id"
   end
 
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 2020_04_17_174655) do
     t.datetime "updated_at", null: false
     t.boolean "deleted", default: false
     t.bigint "attachment_file_id"
+    t.integer "position"
     t.index ["attachment_file_id"], name: "index_sources_on_attachment_file_id"
     t.index ["item_id"], name: "index_sources_on_item_id"
   end

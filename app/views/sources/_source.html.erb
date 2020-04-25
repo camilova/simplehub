@@ -46,5 +46,19 @@
       class: "btn btn-light d-none" do %>
       <%= fa_icon 'history' %>
     <% end %>
+    <% if @admin %>
+      <%= link_to move_source_path(source, direction: 'up'),
+        remote: true,
+        method: :post,
+        class: "btn btn-light" do %>
+        <%= fa_icon 'arrow-up' %>
+      <% end %>
+      <%= link_to move_source_path(source, direction: 'down'),
+        remote: true, 
+        method: :post,
+        class: "btn btn-light" do %>
+        <%= fa_icon 'arrow-down' %>
+      <% end %>
+    <% end %>
   </div>
 </li>

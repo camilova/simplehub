@@ -1,6 +1,6 @@
 class SourcesController < ApplicationController
   before_action :set_item, only: [:new]
-  before_action :set_source, only: [:show, :download, :edit, :update, :destroy]
+  before_action :set_source, only: [:show, :download, :edit, :update, :destroy, :move]
   before_action :authenticate_user!, except: [:index, :download, :show]
 
   # GET /sources/1
@@ -62,6 +62,18 @@ class SourcesController < ApplicationController
     else
       head :internal_server_error
     end
+  end
+
+  # POST /items/1/move?direction=up
+  def move
+    direction = params[:direction]
+    case direction
+    when 'up'
+      @source.move_higher
+    when 'down'
+      @source.move_lower
+    end
+    render json: { id: "source-#{@source.id}", direction: direction }, callback: 'move'
   end
 
   private

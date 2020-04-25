@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :move]
   before_action :set_main_item, only: [:new]
   before_action :set_category, only: [:new, :index]
   before_action :authenticate_user!, except: [:index]
@@ -63,6 +63,18 @@ class ItemsController < ApplicationController
     end
   end
 
+  # POST /items/1/move?direction=up
+  def move
+    direction = params[:direction]
+    case direction
+    when 'up'
+      @item.move_higher
+    when 'down'
+      @item.move_lower
+    end
+    render json: { id: "item-#{@item.id}", direction: direction }, callback: 'move'
+  end
+
   private
     
     def set_item
@@ -78,7 +90,7 @@ class ItemsController < ApplicationController
     end
 
     def item_params
-      params.require(:item).permit(:title, :description, :deprecated, :item_id, category_ids: [])
+      params.require(:item).permit(:title, :description, :deprecated, :item_id, :position, category_ids: [])
     end
     
 end

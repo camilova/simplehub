@@ -26,6 +26,18 @@
             class: "btn btn-light" do %>
             <%= fa_icon 'pencil' %>
           <% end %>
+          <%= link_to move_item_path(subitem, direction: 'up'),
+            remote: true,
+            method: :post,
+            class: "btn btn-light" do %>
+            <%= fa_icon 'arrow-up' %>
+          <% end %>
+          <%= link_to move_item_path(subitem, direction: 'down'),
+            remote: true, 
+            method: :post,
+            class: "btn btn-light" do %>
+            <%= fa_icon 'arrow-down' %>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -35,7 +47,7 @@
       <%= render partial: 'sources/source', locals: { source: source, item: subitem } %>
     <% end %>
     <% if ! subitem.deprecated? && @admin %>
-      <li class="list-style-none">
+      <li class="list-style-none new">
         <small>
           <%= link_to t('.new'), new_source_path(item: subitem.id), remote: true, type: :post %>
         </small>

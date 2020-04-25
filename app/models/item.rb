@@ -4,12 +4,12 @@ class Item < ApplicationRecord
   has_many :item_categories
   has_many :categories, through: :item_categories
   has_many :sources, dependent: :nullify
-  default_scope -> { where(deleted: false).
-    order(:deprecated, published_at: :desc, created_at: :desc) }
+  default_scope -> { where(deleted: false).order(:position) }
   scope :actives, -> { where(deprecated: false) }
   scope :deprecated, -> { where(deprecated: true) }
   scope :main, -> { where(item: nil) }
   after_save :set_deprecated_on_sources
+  acts_as_list scope: :item
 
   def active_sources_count
     sources.actives.count + (items.sum do |i| i.sources.actives.count end)
