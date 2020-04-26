@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy, :move]
   before_action :set_main_item, only: [:new]
   before_action :set_category, only: [:new, :index]
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :contact]
 
   # GET /items
   def index
@@ -73,6 +73,11 @@ class ItemsController < ApplicationController
       @item.move_lower
     end
     render json: { id: "item-#{@item.id}", direction: direction }, callback: 'move'
+  end
+
+  # GET /items/contact
+  def contact
+    render partial: 'contact', callback: 'modal'
   end
 
   private

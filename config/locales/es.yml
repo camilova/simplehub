@@ -21,11 +21,12 @@ es:
     index:
       new_category: Agregar nueva categoría
       new_item: Agregar Tema Principal
-      about: Developed by Waypa - Chile
+      about: Developed by Waypa
       about_title: SimpleHub
       about_link: "https://github.com/camilova/simplehub"
       log_in: Login
       log_out: Cerrar
+      colaborate: "¿Quieres Colaborar?"
     item:
       edit: Editar este titulo
       new_subitem: Agregar Subtema
@@ -41,6 +42,10 @@ es:
       destroy_title: "Eliminar"
     category:
       edit: Editar esta categoría
+    contact:
+      title: Colaborar en Covid Hub
+      contact: "Si deseas colaborar agregando información a este hub para que este accesible de forma pública y ayudar a informar sobre el Covid-19, puedes escribir un correo a:"
+      email: "waypachile@gmail.com"
   layouts:
     header:
       title: COVID-19 HUB

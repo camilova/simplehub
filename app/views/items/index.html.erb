@@ -72,6 +72,7 @@
         <small>
           <%= t('.about') %>
           <%= link_to t('.about_title'), t('.about_link'), target: :_blank, class: 'ml-3 d-none' %>
+          <%= link_to t('.colaborate'), contact_path, remote: true, class: 'ml-3' %>
           <% if user_signed_in? %>
             <%= link_to destroy_user_session_path,
               method: :delete,

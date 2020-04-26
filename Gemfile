@@ -76,3 +76,4 @@ gem 'figaro'
 
 gem "rack", github: "rack/rack"
 gem 'acts_as_list'
+gem 'actionview-encoded_mail_to'
